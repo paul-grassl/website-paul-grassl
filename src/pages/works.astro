@@ -1,0 +1,38 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { SITE } from "@/config";
+
+const title = "Works";
+const description = "Artwork by Paul Graßl";
+---
+
+<Layout title={title} description={description}>
+	<Header />
+	<main id="main-content">
+		<section class="mx-auto flex h-card w-full flex-col justify-center px-3 py-8 md:h-card-md md:px-8 lg:px-24">
+			<div class="text-center">
+				<h1 class="text-3xl font-bold text-foreground md:text-5xl">
+					{title}
+				</h1>
+				<p class="mt-4 text-lg text-muted-foreground md:text-xl">
+					{description}
+				</p>
+			</div>
+		</section>
+		<section class="mx-auto w-full max-w-4xl px-3 py-8 md:px-8 lg:px-24">
+			<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+				<!-- Placeholder for artwork -->
+				<div class="group cursor-pointer">
+					<div class="aspect-square bg-muted rounded-lg mb-4"></div>
+					<h3 class="text-lg font-semibold text-foreground">Artwork Title</h3>
+					<p class="text-sm text-muted-foreground">Oil on canvas, 50x70 cm</p>
+					<p class="text-sm text-muted-foreground">2024</p>
+				</div>
+				<!-- Add more artwork items here -->
+			</div>
+		</section>
+	</main>
+	<Footer />
+</Layout> 
