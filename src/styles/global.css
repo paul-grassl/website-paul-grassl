@@ -39,7 +39,8 @@ html[data-theme="dark"] {
   }
   body {
     @apply flex min-h-svh flex-col bg-background text-foreground selection:bg-accent/75 selection:text-background;
-    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-family: 'EB Garamond', serif;
+    font-size: 18px; /* Larger base font size */
   }
   a,
   button {
@@ -59,8 +60,19 @@ html[data-theme="dark"] {
   @apply max-w-3xl;
 }
 
+/* Hide the wavy underline for active nav links */
 .active-nav {
-  @apply underline decoration-wavy decoration-2 underline-offset-4;
+  /* color: black; /* This will be the default text-foreground color */
+}
+
+/* Style for all navigation links in the header */
+#nav-menu ul > li > a {
+  color: #565656;
+}
+
+/* Style for the active navigation link */
+#nav-menu ul > li > a.active-nav {
+  color: var(--foreground); /* Use the theme's main text color (black in light mode) */
 }
 
 /* Source: https://piccalil.li/blog/a-more-modern-css-reset/ */
