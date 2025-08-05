@@ -6,6 +6,9 @@ import { SITE } from "@/config";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 
+// Import global CSS for hover effect
+import "@/styles/global.css";
+
 const title = "Exhibitions";
 const description = "Exhibitions by Paul Graßl";
 const exhibitions = (await getCollection("exhibitions"))
@@ -31,7 +34,7 @@ const exhibitions = (await getCollection("exhibitions"))
 	<main id="main-content">
 		<section class="mx-auto w-full max-w-6xl px-2 py-8 flex flex-col items-center">
 			{exhibitions.map(exhibition => (
-				        <div class="flex flex-col w-full max-w-5xl mb-16">
+				        <a href={`/exhibitions/${exhibition.data.slug}`} class="group flex flex-col w-full max-w-5xl mb-16 cursor-pointer">
           <div class="w-full aspect-[3/2] bg-muted overflow-hidden">
             <Image 
               src={exhibition.data.image} 
@@ -43,17 +46,17 @@ const exhibitions = (await getCollection("exhibitions"))
               format="webp"
               densities={[1, 2]}
               loading="lazy"
-              fit="cover"
+
             />
           </div>
           <div class="mt-4 w-full">
-            <h3 class="text-lg italic text-foreground font-normal leading-tight">{exhibition.data.title}</h3>
-            <div class="mt-0.5 flex flex-col gap-y-0.5 text-lg text-muted-foreground">
+            <h3 class="text-lg italic font-normal leading-tight transition-colors group-hover:text-accent">{exhibition.data.title}</h3>
+            <div class="mt-0.5 flex flex-col gap-y-0.5 text-lg text-muted-foreground transition-colors group-hover:text-accent">
               <span>{exhibition.data.location}</span>
               <span>{exhibition.data.period}</span>
             </div>
           </div>
-				</div>
+				</a>
 			))}
 		</section>
 	</main>

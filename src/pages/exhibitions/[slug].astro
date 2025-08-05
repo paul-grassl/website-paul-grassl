@@ -1,0 +1,57 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+export async function getStaticPaths() {
+  const exhibitions = await getCollection("exhibitions");
+  return exhibitions.map(exhibition => ({
+    params: { slug: exhibition.data.slug },
+    props: { exhibition },
+  }));
+}
+
+const { exhibition } = Astro.props;
+const { title, location, period, images = [], image } = exhibition.data;
+// Use the main image if no images array is provided
+const displayImages = images.length > 0 ? images : [{ src: image, orientation: 'landscape' }];
+---
+
+<Layout title={title} description={`Exhibition: ${title}`}>
+  <Header />
+  <main id="main-content">
+    <section class="mx-auto w-full max-w-6xl px-2 py-8">
+      <div class="mb-12">
+        <h1 class="text-2xl italic text-foreground font-normal leading-tight mb-2">{title}</h1>
+        <div class="flex flex-col gap-y-0.5 text-lg text-muted-foreground">
+          <span>{location}</span>
+          <span>{period}</span>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-y-12">
+        {displayImages.map((image) => (
+          <div class={`w-full ${image.orientation === 'portrait' ? 'max-w-2xl' : ''} mx-auto`}>
+            <div class={`w-full ${image.orientation === 'portrait' ? 'aspect-[2/3]' : 'aspect-[3/2]'} bg-muted overflow-hidden`}>
+              <Image
+                src={image.src}
+                alt={`Exhibition image from ${title}`}
+                class="object-cover w-full h-full"
+                width={image.orientation === 'portrait' ? 800 : 1920}
+                height={image.orientation === 'portrait' ? 1200 : 1280}
+                quality={80}
+                format="webp"
+                densities={[1, 2]}
+                loading="lazy"
+
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

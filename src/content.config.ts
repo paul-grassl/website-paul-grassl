@@ -31,6 +31,13 @@ const exhibitions = defineCollection({
       location: z.string(),
       period: z.string(),
       image: z.string(),
+      slug: z.string(),
+      images: z.array(
+        z.object({
+          src: z.string(),
+          orientation: z.enum(["landscape", "portrait"]).default("landscape")
+        })
+      ).optional(),
     }),
 });
 
