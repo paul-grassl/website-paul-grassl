@@ -10,9 +10,19 @@ const title = "Exhibitions";
 const description = "Exhibitions by Paul Graßl";
 const exhibitions = (await getCollection("exhibitions"))
   .sort((a, b) => {
-    // Extract the year from the period field (assuming format like "June 30 - July 30, 2023")
-    const getYear = (period: string) => parseInt(period.split(", ")[1]);
-    return getYear(b.data.period) - getYear(a.data.period);
+    // Parse the start date from the period field (format like "March 7 – March 13, 2025")
+    const getStartDate = (period: string) => {
+      const [startPart] = period.split("–").map(p => p.trim());
+      const year = period.split(", ")[1];
+      // Convert month name and day to a consistent date format
+      const date = new Date(`${startPart}, ${year}`);
+      return date;
+    };
+    
+    const dateA = getStartDate(a.data.period);
+    const dateB = getStartDate(b.data.period);
+    // Sort in descending order (newest first)
+    return dateB.getTime() - dateA.getTime();
   });
 ---
 
