@@ -1,27 +1,5 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
-import { SITE } from "@/config";
-
-export const BLOG_PATH = "src/data/blog";
-
-const blog = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: `./${BLOG_PATH}` }),
-  schema: ({ image }) =>
-    z.object({
-      author: z.string().default(SITE.author),
-      pubDatetime: z.date(),
-      modDatetime: z.date().optional().nullable(),
-      title: z.string(),
-      featured: z.boolean().optional(),
-      draft: z.boolean().optional(),
-      tags: z.array(z.string()).default(["others"]),
-      ogImage: image().or(z.string()).optional(),
-      description: z.string(),
-      canonicalURL: z.string().optional(),
-      hideEditPost: z.boolean().optional(),
-      timezone: z.string().optional(),
-    }),
-});
 
 const exhibitions = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: `./src/data/exhibitions` }),
@@ -43,4 +21,29 @@ const exhibitions = defineCollection({
     }),
 });
 
-export const collections = { blog, exhibitions };
+const works = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.md", base: `./src/data/works` }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      technique: z.string(),
+      size: z.string(),
+      year: z.number(),
+      slug: z.string(),
+      isSeries: z.boolean().default(false),
+      // For single works, use this image
+      image: z.string().optional(),
+      orientation: z.enum(["landscape", "portrait"]).default("landscape"),
+      // For series, use this array
+      images: z.array(
+        z.object({
+          src: z.string(),
+          orientation: z.enum(["landscape", "portrait"]).default("landscape"),
+          specificTitle: z.string().optional() // For individual pieces in series like "Work 1"
+        })
+      ).optional(),
+      order: z.number().optional(), // For sorting works within a year
+    }),
+});
+
+export const collections = { exhibitions, works };

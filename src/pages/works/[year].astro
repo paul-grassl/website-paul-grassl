@@ -1,0 +1,210 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+export async function getStaticPaths() {
+  const allWorks = await getCollection("works");
+  const years = [...new Set(allWorks.map(work => work.data.year))];
+  
+  return years.map(year => ({
+    params: { year: year.toString() },
+    props: { 
+      year,
+      works: allWorks
+        .filter(work => work.data.year === year)
+        .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
+    },
+  }));
+}
+
+const { year, works } = Astro.props;
+const title = `Works ${year}`;
+const description = `Artwork by Paul Graßl from ${year}`;
+---
+
+<Layout title={title} description={description}>
+  <Header />
+  <main id="main-content">
+    <section class="mx-auto w-full max-w-5xl px-6 py-8">
+      <div class="flex flex-col gap-y-8">
+        <div class="w-full">
+          <h1 class="text-2xl font-normal leading-tight mb-2 text-foreground">Works {year}</h1>
+        </div>
+
+        {works.map((work) => (
+          <div class="w-full">
+            {work.data.isSeries ? (
+              <!-- Series slideshow -->
+              <div class="work-series" data-work-title={work.data.title} data-technique={work.data.technique} data-size={work.data.size}>
+                <div class="slideshow-container relative">
+                  <div class="slides">
+                    {work.data.images?.map((image, index) => (
+                      <div class={`slide ${index === 0 ? 'active' : 'hidden'}`} data-slide-index={index}>
+                        <div class={`${image.orientation === 'portrait' ? 'flex justify-center' : 'w-full'}`}>
+                          <div class={`relative ${image.orientation === 'portrait' ? 'max-w-lg' : 'w-full'} mx-auto`}>
+                            <Image
+                              src={image.src}
+                              alt={`${work.data.title} - ${image.specificTitle || `Work ${index + 1}`}`}
+                              class="cursor-pointer w-full"
+                              width={image.orientation === 'portrait' ? 600 : 1920}
+                              height={image.orientation === 'portrait' ? 900 : 1280}
+                              quality={80}
+                              format="webp"
+                              densities={[1, 2]}
+                              loading="lazy"
+                            />
+                            <!-- Left/Right click areas -->
+                            <div class="absolute inset-0 flex">
+                              <div class="w-1/2 h-full cursor-pointer slide-nav-left" data-direction="prev"></div>
+                              <div class="w-1/2 h-full cursor-pointer slide-nav-right" data-direction="next"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                <!-- Series text information -->
+                <div class="mt-2">
+                  <!-- Specific work info -->
+                  <div class="specific-info">
+                    {work.data.images?.map((image, index) => (
+                      <div class={`specific-title ${index === 0 ? 'block' : 'hidden'} ${image.orientation === 'portrait' ? 'text-center' : ''}`} data-slide-index={index}>
+                        <span class="text-base text-foreground">
+                          {image.specificTitle || `Work ${index + 1}`}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <!-- General work info -->
+                  <div class={`general-info mt-3 ${work.data.images?.[0]?.orientation === 'portrait' ? 'text-center' : ''}`}>
+                    <h3 class="text-base italic font-normal leading-tight text-foreground">{work.data.title}</h3>
+                    <div class="mt-0.5 flex flex-col gap-y-0.5 text-base text-muted-foreground">
+                      <span>{work.data.technique}</span>
+                      <span>{work.data.size}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <!-- Single work -->
+              <div class="single-work">
+                <div class={`${work.data.orientation === 'portrait' ? 'flex justify-center' : 'w-full'}`}>
+                  <div class={`relative ${work.data.orientation === 'portrait' ? 'max-w-lg' : 'w-full'} mx-auto`}>
+                    <Image
+                      src={work.data.image!}
+                      alt={work.data.title}
+                      class="w-full"
+                      width={work.data.orientation === 'portrait' ? 600 : 1920}
+                      height={work.data.orientation === 'portrait' ? 900 : 1280}
+                      quality={80}
+                      format="webp"
+                      densities={[1, 2]}
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+                
+                <!-- Single work text information -->
+                <div class={`mt-2 ${work.data.orientation === 'portrait' ? 'text-center' : 'w-full'}`}>
+                  <h3 class="text-base italic font-normal leading-tight text-foreground">{work.data.title}</h3>
+                  <div class="mt-0.5 flex flex-col gap-y-0.5 text-base text-muted-foreground">
+                    <span>{work.data.technique}</span>
+                    <span>{work.data.size}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  // Slideshow functionality
+  function initSlideshows() {
+    const seriesContainers = document.querySelectorAll('.work-series');
+    
+    seriesContainers.forEach(container => {
+      const slides = container.querySelectorAll('.slide');
+      const specificTitles = container.querySelectorAll('.specific-title');
+      const navElements = container.querySelectorAll('.slide-nav-left, .slide-nav-right');
+      
+      let currentSlide = 0;
+      
+      function showSlide(index: number) {
+        // Hide all slides and titles
+        slides.forEach(slide => {
+          slide.classList.add('hidden');
+          slide.classList.remove('active');
+        });
+        specificTitles.forEach(title => {
+          title.classList.add('hidden');
+          title.classList.remove('block');
+        });
+        
+        // Show current slide and title
+        if (slides[index]) {
+          slides[index].classList.remove('hidden');
+          slides[index].classList.add('active');
+        }
+        if (specificTitles[index]) {
+          specificTitles[index].classList.remove('hidden');
+          specificTitles[index].classList.add('block');
+        }
+      }
+      
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }
+      
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+      }
+      
+      // Add click handlers
+      navElements.forEach(nav => {
+        nav.addEventListener('click', (e) => {
+          e.preventDefault();
+          const direction = nav.getAttribute('data-direction');
+          if (direction === 'next') {
+            nextSlide();
+          } else if (direction === 'prev') {
+            prevSlide();
+          }
+        });
+      });
+    });
+  }
+  
+  // Initialize on page load
+  initSlideshows();
+  
+  // Re-initialize on view transitions
+  document.addEventListener('astro:after-swap', initSlideshows);
+</script>
+
+<style>
+  .slide {
+    position: relative;
+  }
+  
+  .slide-nav-left:hover,
+  .slide-nav-right:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  
+  .specific-title {
+    transition: opacity 0.2s ease-in-out;
+  }
+</style>
