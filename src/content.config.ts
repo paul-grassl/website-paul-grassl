@@ -29,6 +29,7 @@ const exhibitions = defineCollection({
     z.object({
       title: z.string(),
       location: z.string(),
+      type: z.string(),
       period: z.string(),
       image: z.string(),
       slug: z.string(),
@@ -38,6 +39,7 @@ const exhibitions = defineCollection({
           orientation: z.enum(["landscape", "portrait"]).default("landscape")
         })
       ).optional(),
+      exhibitionViews: z.string().optional(),
     }),
 });
 

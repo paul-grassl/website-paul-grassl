@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 }
 
 const { exhibition } = Astro.props;
-const { title, location, period, images = [], image } = exhibition.data;
+const { title, location, type, period, images = [], image, exhibitionViews = "XX" } = exhibition.data;
 // Use the main image if no images array is provided
 const displayImages = images.length > 0 ? images : [{ src: image, orientation: 'landscape' }];
 ---
@@ -22,34 +22,40 @@ const displayImages = images.length > 0 ? images : [{ src: image, orientation: '
 <Layout title={title} description={`Exhibition: ${title}`}>
   <Header />
   <main id="main-content">
-    <section class="mx-auto w-full max-w-6xl px-2 py-8">
-      <div class="mb-12">
-        <h1 class="text-2xl italic text-foreground font-normal leading-tight mb-2">{title}</h1>
-        <div class="flex flex-col gap-y-0.5 text-lg text-muted-foreground">
-          <span>{location}</span>
-          <span>{period}</span>
+    <section class="mx-auto w-full max-w-5xl px-6 py-8">
+      <div class="flex flex-col gap-y-8">
+        <div class="w-full">
+          <h1 class="text-2xl italic text-foreground font-normal leading-tight mb-2">{title}</h1>
+          <div class="flex flex-col gap-y-0.5 text-lg text-muted-foreground">
+            <span>{location}</span>
+            <span>{type}</span>
+            <span>{period}</span>
+          </div>
         </div>
-      </div>
 
-      <div class="flex flex-col gap-y-12">
         {displayImages.map((image) => (
-          <div class={`w-full ${image.orientation === 'portrait' ? 'max-w-2xl' : ''} mx-auto`}>
-            <div class={`w-full ${image.orientation === 'portrait' ? 'aspect-[2/3]' : 'aspect-[3/2]'} bg-muted overflow-hidden`}>
+          <div class="w-full">
+            <div class={`${image.orientation === 'portrait' ? 'aspect-[2/3] max-w-md mx-auto' : 'w-full aspect-[3/2]'} bg-muted overflow-hidden`}>
               <Image
                 src={image.src}
                 alt={`Exhibition image from ${title}`}
                 class="object-cover w-full h-full"
-                width={image.orientation === 'portrait' ? 800 : 1920}
-                height={image.orientation === 'portrait' ? 1200 : 1280}
+                width={image.orientation === 'portrait' ? 600 : 1920}
+                height={image.orientation === 'portrait' ? 900 : 1280}
                 quality={80}
                 format="webp"
                 densities={[1, 2]}
                 loading="lazy"
-
               />
             </div>
           </div>
         ))}
+
+        <div class="w-full">
+          <div class="text-lg text-muted-foreground">
+            <span>Exhibition views: {exhibitionViews}</span>
+          </div>
+        </div>
       </div>
     </section>
   </main>

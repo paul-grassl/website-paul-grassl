@@ -1,11 +1,25 @@
 ---
 title: "Wo sind meine Grenzen?"
 location: "ECKSTEIN - Raum für zeitgenössische Kunst, Munich, Germany"
+type: "Two-person show with Bastian Maria Meindl"
 period: "June 30 – July 30, 2023"
 image: "/assets/exhibitionImages/exhib_2023_woSindMeineGrenzen_1.jpg"
 slug: "wo-sind-meine-grenzen"
 images:
+  - src: "/assets/exhibitionImages/exhib_2023_woSindMeineGrenzen_3.jpg"
+    orientation: "landscape"
   - src: "/assets/exhibitionImages/exhib_2023_woSindMeineGrenzen_1.jpg"
     orientation: "landscape"
+  - src: "/assets/exhibitionImages/exhib_2023_woSindMeineGrenzen_2.jpg"
+    orientation: "landscape"
+  - src: "/assets/exhibitionImages/exhib_2023_woSindMeineGrenzen_4.jpg"
+    orientation: "landscape"
+  - src: "/assets/exhibitionImages/exhib_2023_woSindMeineGrenzen_5.jpg"
+    orientation: "portrait"
+  - src: "/assets/exhibitionImages/exhib_2023_woSindMeineGrenzen_6.jpg"
+    orientation: "landscape"
+  - src: "/assets/exhibitionImages/exhib_2023_woSindMeineGrenzen_7.jpg"
+    orientation: "landscape"
+exhibitionViews: "Paul Graßl"
 ---
 

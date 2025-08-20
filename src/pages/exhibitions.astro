@@ -26,30 +26,40 @@ const exhibitions = (await getCollection("exhibitions"))
     const dateB = getStartDate(b.data.period);
     // Sort in descending order (newest first)
     return dateB.getTime() - dateA.getTime();
+  })
+  .map(exhibition => {
+    // Use the main image field for the exhibition overview page
+    const mainImage = { src: exhibition.data.image, orientation: 'landscape' };
+    
+    return {
+      ...exhibition,
+      mainImage
+    };
   });
 ---
 
 <Layout title={title} description={description}>
 	<Header />
 	<main id="main-content">
-		<section class="mx-auto w-full max-w-6xl px-2 py-8 flex flex-col items-center">
+		<section class="mx-auto w-full max-w-5xl px-6 py-8 flex flex-col">
+			<h1 class="text-2xl font-normal leading-tight mb-12 text-foreground">Exhibitions</h1>
 			{exhibitions.map(exhibition => (
-				        <a href={`/exhibitions/${exhibition.data.slug}`} class="group flex flex-col w-full max-w-5xl mb-16 cursor-pointer">
-          <div class="w-full aspect-[3/2] bg-muted overflow-hidden">
+				        <div class="w-full flex flex-col items-center mb-16">
+				        <a href={`/exhibitions/${exhibition.data.slug}`} class={`group flex flex-col cursor-pointer ${exhibition.mainImage.orientation === 'portrait' ? 'items-center' : 'items-start w-full'}`}>
+          <div class={`${exhibition.mainImage.orientation === 'portrait' ? 'aspect-[2/3] max-w-md' : 'w-full aspect-[3/2]'} bg-muted overflow-hidden`}>
             <Image 
-              src={exhibition.data.image} 
+              src={exhibition.mainImage.src} 
               alt={exhibition.data.title} 
               class="object-cover w-full h-full"
-              width={1920}
-              height={1280}
+              width={exhibition.mainImage.orientation === 'portrait' ? 1280 : 1920}
+              height={exhibition.mainImage.orientation === 'portrait' ? 1920 : 1280}
               quality={80}
               format="webp"
               densities={[1, 2]}
               loading="lazy"
-
             />
           </div>
-          <div class="mt-4 w-full">
+          <div class={`mt-4 ${exhibition.mainImage.orientation === 'portrait' ? 'max-w-md text-center' : 'w-full'}`}>
             <h3 class="text-lg italic font-normal leading-tight transition-colors group-hover:text-accent">{exhibition.data.title}</h3>
             <div class="mt-0.5 flex flex-col gap-y-0.5 text-lg text-muted-foreground transition-colors group-hover:text-accent">
               <span>{exhibition.data.location}</span>
@@ -57,6 +67,7 @@ const exhibitions = (await getCollection("exhibitions"))
             </div>
           </div>
 				</a>
+				</div>
 			))}
 		</section>
 	</main>
