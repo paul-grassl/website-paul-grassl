@@ -1,0 +1,6 @@
+public/assets/exhibitionImages/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+public/assets/exhibitionImages/**/*.jpeg filter=lfs diff=lfs merge=lfs -text
+public/assets/exhibitionImages/**/*.png filter=lfs diff=lfs merge=lfs -text
+public/assets/workImages/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+public/assets/workImages/**/*.jpeg filter=lfs diff=lfs merge=lfs -text
+public/assets/workImages/**/*.png filter=lfs diff=lfs merge=lfs -text
