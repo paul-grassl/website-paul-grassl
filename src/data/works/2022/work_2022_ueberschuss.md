@@ -7,5 +7,5 @@ slug: "ueberschuss2-2022"
 isSeries: false
 image: "/assets/workImages/2022/PG_2022_20x20_ueberschuss2.jpg"
 orientation: "portrait"
-order: 9
+order: 12
 ---

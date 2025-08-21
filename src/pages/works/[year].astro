@@ -43,8 +43,8 @@ const description = `Artwork by Paul Graßl from ${year}`;
                   <div class="slides">
                     {work.data.images?.map((image, index) => (
                       <div class={`slide ${index === 0 ? 'active' : 'hidden'}`} data-slide-index={index}>
-                        <div class={`${image.orientation === 'portrait' ? 'flex justify-center' : 'w-full'}`}>
-                          <div class={`relative ${image.orientation === 'portrait' ? 'max-w-lg' : 'w-full'} mx-auto`}>
+                        <div class={`${image.orientation === 'portrait' ? 'flex justify-center' : 'flex justify-center'}`}>
+                          <div class={`relative ${image.orientation === 'portrait' ? 'max-w-lg' : 'max-w-2xl'} mx-auto`}>
                             <Image
                               src={image.src}
                               alt={`${work.data.title} - ${image.specificTitle || `Work ${index + 1}`}`}
@@ -138,8 +138,8 @@ const description = `Artwork by Paul Graßl from ${year}`;
             ) : (
               <!-- Single work -->
               <div class="single-work">
-                <div class={`${work.data.orientation === 'portrait' ? 'flex justify-center' : 'w-full'}`}>
-                  <div class={`relative ${work.data.orientation === 'portrait' ? 'max-w-lg' : 'w-full'} mx-auto`}>
+                <div class={`${work.data.orientation === 'portrait' ? 'flex justify-center' : 'flex justify-center'}`}>
+                  <div class={`relative ${work.data.orientation === 'portrait' ? 'max-w-lg' : 'max-w-2xl'} mx-auto`}>
                     <Image
                       src={work.data.image!}
                       alt={work.data.title}
@@ -155,7 +155,7 @@ const description = `Artwork by Paul Graßl from ${year}`;
                 </div>
                 
                 <!-- Single work text information -->
-                <div class={`mt-2 ${work.data.orientation === 'portrait' ? 'text-center' : 'w-full'}`}>
+                <div class={`mt-2 text-center ${work.data.orientation === 'portrait' ? 'max-w-lg' : 'max-w-2xl'} mx-auto`}>
                   <h3 class="text-base italic font-normal leading-tight text-foreground">{work.data.title}</h3>
                   <div class="mt-0.5 flex flex-col gap-y-0.5 text-base text-muted-foreground">
                     <span>{work.data.technique}</span>
