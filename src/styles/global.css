@@ -67,12 +67,17 @@ html[data-theme="dark"] {
 
 /* Style for all navigation links in the header */
 #nav-menu ul > li > a {
-  color: #565656;
+  color: #777777; /* Darker grey for better readability while maintaining contrast with black */
 }
 
 /* Style for the active navigation link */
 #nav-menu ul > li > a.active-nav {
   color: var(--foreground); /* Use the theme's main text color (black in light mode) */
+}
+
+/* Custom navigation colors */
+.text-nav-inactive {
+  color: #777777; /* Darker grey for inactive nav items - still lighter than slideshow counter */
 }
 
 /* Source: https://piccalil.li/blog/a-more-modern-css-reset/ */

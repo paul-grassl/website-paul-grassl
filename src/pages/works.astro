@@ -35,9 +35,9 @@ const sortedYears = Object.keys(worksByYear)
 					<div class="w-full">
 						<a href={`/works/${year}`} class="group flex flex-col cursor-pointer">
 							<h2 class="text-xl font-normal leading-tight transition-colors group-hover:text-accent mb-4">
-								Works {year}
+								<span class="hidden sm:inline">Works </span>{year}
 							</h2>
-							<div class="text-lg text-muted-foreground transition-colors group-hover:text-accent">
+							<div class="text-lg text-muted-foreground transition-colors group-hover:text-accent hidden sm:block">
 								{worksByYear[year].length} {worksByYear[year].length === 1 ? 'work' : 'works'}
 							</div>
 						</a>
