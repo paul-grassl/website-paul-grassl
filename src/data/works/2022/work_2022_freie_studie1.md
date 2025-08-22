@@ -8,4 +8,5 @@ isSeries: false
 image: "/assets/workImages/2022/PG_2022_70x50_FreieStudie1.jpg"
 orientation: "portrait"
 order: 11
+displaySize: "medium"
 ---

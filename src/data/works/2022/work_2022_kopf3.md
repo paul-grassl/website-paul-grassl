@@ -8,4 +8,5 @@ isSeries: false
 image: "/assets/workImages/2022/PG_2022_97x80_Kopf3.jpg"
 orientation: "portrait"
 order: 3
+displaySize: "medium"
 ---

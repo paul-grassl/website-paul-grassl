@@ -6,6 +6,7 @@ year: 2025
 slug: "akiya-series-2025"
 isSeries: true
 order: 1
+displaySize: "large"
 images:
   - src: "/assets/workImages/2025/PG_2024-2025_109.1x78.8_1-64-3(Akiya).jpg"
     orientation: "portrait"

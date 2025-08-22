@@ -44,7 +44,13 @@ const description = `Artwork by Paul Graßl from ${year}`;
                     {work.data.images?.map((image, index) => (
                       <div class={`slide ${index === 0 ? 'active' : 'hidden'}`} data-slide-index={index}>
                         <div class={`${image.orientation === 'portrait' ? 'flex justify-center' : 'flex justify-center'}`}>
-                          <div class={`relative ${image.orientation === 'portrait' ? 'max-w-lg' : 'max-w-2xl'} mx-auto`}>
+                          <div class={`relative ${
+                            work.data.displaySize === 'small' 
+                              ? (image.orientation === 'portrait' ? 'max-w-xs' : 'max-w-lg') 
+                              : work.data.displaySize === 'large'
+                              ? (image.orientation === 'portrait' ? 'max-w-xl' : 'max-w-4xl')
+                              : (image.orientation === 'portrait' ? 'max-w-lg' : 'max-w-2xl')
+                          } mx-auto`}>
                             <Image
                               src={image.src}
                               alt={`${work.data.title} - ${image.specificTitle || `Work ${index + 1}`}`}
@@ -64,16 +70,14 @@ const description = `Artwork by Paul Graßl from ${year}`;
                   
                   <!-- Mobile navigation areas - contained within image -->
                   <div class="absolute inset-0 flex z-10 md:hidden">
-                    <div class="w-[35%] h-full slide-nav-left cursor-pointer" data-direction="prev"></div>
-                    <div class="w-[30%] h-full"></div>
-                    <div class="w-[35%] h-full slide-nav-right cursor-pointer" data-direction="next"></div>
+                    <div class="w-1/2 h-full slide-nav-left cursor-pointer" data-direction="prev"></div>
+                    <div class="w-1/2 h-full slide-nav-right cursor-pointer" data-direction="next"></div>
                   </div>
                   
                   <!-- Desktop navigation areas - extending beyond image -->
                   <div class="absolute inset-x-0 inset-y-0 hidden md:flex z-10" style="left: -50vw; right: -50vw;">
-                    <div class="w-[40%] h-full slide-nav-left cursor-pointer" data-direction="prev"></div>
-                    <div class="w-[20%] h-full"></div>
-                    <div class="w-[40%] h-full slide-nav-right cursor-pointer" data-direction="next"></div>
+                    <div class="w-1/2 h-full slide-nav-left cursor-pointer" data-direction="prev"></div>
+                    <div class="w-1/2 h-full slide-nav-right cursor-pointer" data-direction="next"></div>
                   </div>
                   
                   <!-- Navigation arrows - hidden on mobile -->
@@ -94,8 +98,14 @@ const description = `Artwork by Paul Graßl from ${year}`;
                 <!-- Series text information -->
                 <div class="mt-2">
                   <!-- Container for both left counter and center individual info -->
-                  <div class={`flex ${work.data.images?.[0]?.orientation === 'portrait' ? 'justify-center' : 'justify-start'}`}>
-                    <div class={`${work.data.images?.[0]?.orientation === 'portrait' ? 'max-w-lg w-full' : 'w-full'} flex justify-between items-start`}>
+                  <div class={`flex justify-center`}>
+                    <div class={`${
+                      work.data.displaySize === 'small' 
+                        ? (work.data.images?.[0]?.orientation === 'portrait' ? 'max-w-xs w-full' : 'max-w-lg w-full')
+                        : work.data.displaySize === 'large'
+                        ? (work.data.images?.[0]?.orientation === 'portrait' ? 'max-w-xl w-full' : 'max-w-4xl w-full')
+                        : (work.data.images?.[0]?.orientation === 'portrait' ? 'max-w-lg w-full' : 'max-w-2xl w-full')
+                    } flex justify-between items-start`}>
                       <!-- Left side: Order counter -->
                       <div class="slide-counter w-16">
                         {work.data.images?.map((image, index) => (
@@ -123,8 +133,14 @@ const description = `Artwork by Paul Graßl from ${year}`;
                   
                   <!-- General work info -->
                   <div class={`general-info mt-3`}>
-                    <div class={`flex ${work.data.images?.[0]?.orientation === 'portrait' ? 'justify-center' : 'justify-start'}`}>
-                      <div class={`${work.data.images?.[0]?.orientation === 'portrait' ? 'max-w-lg w-full text-center' : 'w-full'}`}>
+                    <div class={`flex justify-center`}>
+                      <div class={`${
+                        work.data.displaySize === 'small' 
+                          ? (work.data.images?.[0]?.orientation === 'portrait' ? 'max-w-xs w-full text-center' : 'max-w-lg w-full text-center')
+                          : work.data.displaySize === 'large'
+                          ? (work.data.images?.[0]?.orientation === 'portrait' ? 'max-w-xl w-full text-center' : 'max-w-4xl w-full text-center')
+                          : (work.data.images?.[0]?.orientation === 'portrait' ? 'max-w-lg w-full text-center' : 'max-w-2xl w-full text-center')
+                      }`}>
                         <h3 class="text-base italic font-normal leading-tight text-foreground">{work.data.title}</h3>
                         <div class="mt-0.5 flex flex-col gap-y-0.5 text-base text-muted-foreground">
                           <span>{work.data.technique}</span>
@@ -139,7 +155,13 @@ const description = `Artwork by Paul Graßl from ${year}`;
               <!-- Single work -->
               <div class="single-work">
                 <div class={`${work.data.orientation === 'portrait' ? 'flex justify-center' : 'flex justify-center'}`}>
-                  <div class={`relative ${work.data.orientation === 'portrait' ? 'max-w-lg' : 'max-w-2xl'} mx-auto`}>
+                  <div class={`relative ${
+                    work.data.displaySize === 'small' 
+                      ? (work.data.orientation === 'portrait' ? 'max-w-xs' : 'max-w-lg') 
+                      : work.data.displaySize === 'large'
+                      ? (work.data.orientation === 'portrait' ? 'max-w-xl' : 'max-w-4xl')
+                      : (work.data.orientation === 'portrait' ? 'max-w-lg' : 'max-w-2xl')
+                  } mx-auto`}>
                     <Image
                       src={work.data.image!}
                       alt={work.data.title}
@@ -155,7 +177,13 @@ const description = `Artwork by Paul Graßl from ${year}`;
                 </div>
                 
                 <!-- Single work text information -->
-                <div class={`mt-2 text-center ${work.data.orientation === 'portrait' ? 'max-w-lg' : 'max-w-2xl'} mx-auto`}>
+                <div class={`mt-2 text-center ${
+                  work.data.displaySize === 'small' 
+                    ? (work.data.orientation === 'portrait' ? 'max-w-xs' : 'max-w-lg') 
+                    : work.data.displaySize === 'large'
+                    ? (work.data.orientation === 'portrait' ? 'max-w-xl' : 'max-w-4xl')
+                    : (work.data.orientation === 'portrait' ? 'max-w-lg' : 'max-w-2xl')
+                } mx-auto`}>
                   <h3 class="text-base italic font-normal leading-tight text-foreground">{work.data.title}</h3>
                   <div class="mt-0.5 flex flex-col gap-y-0.5 text-base text-muted-foreground">
                     <span>{work.data.technique}</span>
@@ -188,6 +216,12 @@ const description = `Artwork by Paul Graßl from ${year}`;
       let currentSlide = 0;
       
       function showSlide(index: number) {
+        // Preserve scroll position more reliably
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Prevent any automatic scrolling
+        document.body.style.overflowAnchor = 'none';
+        
         // Hide all slides, titles, and counters
         slides.forEach(slide => {
           slide.classList.add('hidden');
@@ -215,16 +249,37 @@ const description = `Artwork by Paul Graßl from ${year}`;
           counterItems[index].classList.remove('hidden');
           counterItems[index].classList.add('block');
         }
+        
+        // Use requestAnimationFrame to ensure DOM is updated before restoring scroll
+        requestAnimationFrame(() => {
+          window.scrollTo(0, currentScroll);
+          // Re-enable scroll anchoring after a brief delay
+          setTimeout(() => {
+            document.body.style.overflowAnchor = 'auto';
+          }, 100);
+        });
       }
       
       function nextSlide() {
+        // Prevent focus changes from causing scroll jumps
+        const activeElement = document.activeElement as HTMLElement;
         currentSlide = (currentSlide + 1) % slides.length;
         showSlide(currentSlide);
+        // Keep focus on the same element to prevent scroll jumps
+        if (activeElement) {
+          activeElement.blur();
+        }
       }
       
       function prevSlide() {
+        // Prevent focus changes from causing scroll jumps
+        const activeElement = document.activeElement as HTMLElement;
         currentSlide = (currentSlide - 1 + slides.length) % slides.length;
         showSlide(currentSlide);
+        // Keep focus on the same element to prevent scroll jumps
+        if (activeElement) {
+          activeElement.blur();
+        }
       }
       
       // Add click handlers for navigation (only for this container's nav elements)
@@ -317,5 +372,18 @@ const description = `Artwork by Paul Graßl from ${year}`;
     .work-series {
       overflow: hidden;
     }
+  }
+  
+  /* Prevent scroll jumping during slide transitions */
+  .work-series {
+    overflow-anchor: none;
+  }
+  
+  .work-series .slide {
+    overflow-anchor: none;
+  }
+  
+  .work-series .slideshow-container {
+    overflow-anchor: none;
   }
 </style>

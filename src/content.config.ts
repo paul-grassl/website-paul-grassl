@@ -43,6 +43,7 @@ const works = defineCollection({
         })
       ).optional(),
       order: z.number().optional(), // For sorting works within a year
+      displaySize: z.enum(["small", "medium", "large"]).default("medium"), // Size category for display
     }),
 });
 

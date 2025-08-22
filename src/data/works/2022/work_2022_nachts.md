@@ -8,4 +8,5 @@ isSeries: false
 image: "/assets/workImages/2022/PG_2022_65x88_Nachts.jpg"
 orientation: "landscape"
 order: 10
+displaySize: "medium"
 ---
