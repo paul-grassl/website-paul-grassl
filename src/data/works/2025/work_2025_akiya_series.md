@@ -8,15 +8,15 @@ isSeries: true
 order: 1
 displaySize: "large"
 images:
+  - src: "/assets/workImages/2025/PG_2024-2025_109.1x78.8_4-3-7(Akiya).jpg"
+    orientation: "portrait"
+    specificTitle: "4-3-7"
   - src: "/assets/workImages/2025/PG_2024-2025_109.1x78.8_1-64-3(Akiya).jpg"
     orientation: "portrait"
     specificTitle: "1-64-3"
   - src: "/assets/workImages/2025/PG_2024-2025_109.1x78.8_2-1-15(Akiya).jpg"
     orientation: "portrait"
     specificTitle: "2-1-15"
-  - src: "/assets/workImages/2025/PG_2024-2025_109.1x78.8_4-3-7(Akiya).jpg"
-    orientation: "portrait"
-    specificTitle: "4-3-7"
   - src: "/assets/workImages/2025/PG_2024-2025_109.1x78.8_4-31-6(Akiya).jpg"
     orientation: "portrait"
     specificTitle: "4-31-6"
