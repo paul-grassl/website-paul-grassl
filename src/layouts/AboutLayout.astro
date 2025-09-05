@@ -20,9 +20,83 @@ const { frontmatter } = Astro.props;
   <Breadcrumb />
   <main id="main-content">
     <section id="about" class="app-prose mb-28 max-w-app prose-img:border-0">
-      <h1 class="text-2xl tracking-wider sm:text-3xl">{frontmatter.title}</h1>
       <slot />
     </section>
   </main>
+
+  <style>
+    /* Studio photo styling - matching ichiban small landscape size */
+    #about img:first-of-type {
+      max-width: 20rem; /* max-w-xs equivalent - smaller than max-w-lg */
+      margin: 0 auto;
+      display: block;
+    }
+
+    /* Personal info styling - not italic */
+    #about em {
+      font-style: normal;
+      display: block;
+      margin-top: 2rem;
+      margin-bottom: 3rem;
+      line-height: 1.6;
+    }
+
+    /* CV sections */
+    #about h2 {
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* CV items - always flex row layout */
+    .cv-item {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .cv-year {
+      font-weight: normal;
+      width: 8rem;
+      flex-shrink: 0;
+    }
+
+    .cv-content {
+      flex: 1;
+      line-height: 1.6;
+    }
+
+    /* Exhibition titles should be italic */
+    .cv-content .exhibition-title {
+      font-style: italic;
+      display: block;
+    }
+
+    /* Show type on new line, below exhibition title */
+    .cv-content .show-type {
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 0.9em;
+      color: #6b7280; /* text-gray-500 equivalent */
+    }
+
+    /* Mobile responsive adjustments */
+    @media (max-width: 639px) {
+      .cv-item {
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .cv-year {
+        width: 100%;
+        margin-bottom: 0.25rem;
+      }
+
+      .cv-content {
+        margin-left: 0;
+      }
+    }
+  </style>
   <Footer />
 </Layout>
