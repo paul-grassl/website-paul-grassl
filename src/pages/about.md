@@ -13,7 +13,7 @@ title: "About"
   <div class="cv-year">2021–ongoing</div>
   <div class="cv-content">
     Akademie der Bildenden Künste München, DE<br>
-    Study program Fine Arts<br>
+    Study of Fine Arts<br>
     Class: Prof. Anke Doberauer (Painting and Printmaking)
   </div>
 </div>
@@ -135,7 +135,6 @@ title: "About"
 <div class="cv-item">
   <div class="cv-year">2015–2016</div>
   <div class="cv-content">
-    ERASMUS Scholarship<br>
-    Scholarship for an exchange at Universidad Politécnica de Madrid
+    ERASMUS Scholarship
   </div>
 </div>

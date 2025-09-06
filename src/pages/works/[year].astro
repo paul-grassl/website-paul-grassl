@@ -205,13 +205,28 @@ const description = `Artwork by Paul Graßl from ${year}`;
   function initSlideshows() {
     const seriesContainers = document.querySelectorAll('.work-series');
     
+    if (seriesContainers.length === 0) {
+      // No series containers found, try again after a short delay
+      setTimeout(initSlideshows, 100);
+      return;
+    }
+    
     seriesContainers.forEach(container => {
+      // Skip if already initialized
+      if (container.hasAttribute('data-slideshow-initialized')) {
+        return;
+      }
+      
       const slides = container.querySelectorAll('.slide');
       const specificTitles = container.querySelectorAll('.specific-title');
       const counterItems = container.querySelectorAll('.counter-item');
-      const navElements = document.querySelectorAll('.slide-nav-left, .slide-nav-right');
       const leftArrow = document.querySelector('.nav-arrow-left');
       const rightArrow = document.querySelector('.nav-arrow-right');
+      
+      // Only proceed if we have slides
+      if (slides.length === 0) {
+        return;
+      }
       
       let currentSlide = 0;
       
@@ -311,29 +326,61 @@ const description = `Artwork by Paul Graßl from ${year}`;
           if (rightArrow) rightArrow.style.opacity = '0';
         });
       });
+      
+      // Mark as initialized
+      container.setAttribute('data-slideshow-initialized', 'true');
     });
   }
   
-  // Prevent initial scroll to top
-  document.addEventListener('DOMContentLoaded', () => {
+  // Robust initialization function that handles multiple scenarios
+  function safeInitSlideshows() {
+    // Try immediate initialization
+    initSlideshows();
+    
+    // Also try after images are loaded
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSlideshows);
+    }
+    
+    // And after window load (all resources including images)
+    if (document.readyState !== 'complete') {
+      window.addEventListener('load', initSlideshows);
+    }
+    
     // Preserve scroll position on load
     const scrollY = window.scrollY;
     setTimeout(() => {
       window.scrollTo(0, scrollY);
     }, 0);
-  });
+  }
 
-  // Initialize on page load
-  document.addEventListener('DOMContentLoaded', initSlideshows);
+  // Initialize based on current document state
+  if (document.readyState === 'loading') {
+    // Document is still loading
+    document.addEventListener('DOMContentLoaded', safeInitSlideshows);
+  } else {
+    // Document is already loaded
+    safeInitSlideshows();
+  }
   
-  // Re-initialize on view transitions
+  // Re-initialize on view transitions (Astro navigation)
   document.addEventListener('astro:after-swap', () => {
+    // Clear any existing initialization markers
+    document.querySelectorAll('[data-slideshow-initialized]').forEach(el => {
+      el.removeAttribute('data-slideshow-initialized');
+    });
+    
     // Preserve scroll position on navigation
     const scrollY = window.scrollY;
-    initSlideshows();
+    safeInitSlideshows();
     setTimeout(() => {
       window.scrollTo(0, scrollY);
     }, 0);
+  });
+  
+  // Also listen for astro:page-load (triggered on direct page loads)
+  document.addEventListener('astro:page-load', () => {
+    safeInitSlideshows();
   });
 </script>
 
