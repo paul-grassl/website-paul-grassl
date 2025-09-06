@@ -19,7 +19,7 @@ const { frontmatter } = Astro.props;
   <Header />
   <Breadcrumb />
   <main id="main-content">
-    <section id="about" class="app-prose mb-28 max-w-app prose-img:border-0 text-lg">
+    <section id="about" class="mx-auto w-full max-w-5xl px-6 py-8 text-lg">
       <slot />
     </section>
   </main>
@@ -30,15 +30,19 @@ const { frontmatter } = Astro.props;
       max-width: 32rem;
       width: 100%;
       height: auto;
-      margin: 0 auto;
+      margin: 0 auto 2rem auto; /* Added bottom margin for spacing */
       display: block;
     }
 
 
-    /* CV sections */
+    /* CV sections - styled like "Works 2025" title but bold */
     section#about h2 {
+      font-size: 1.5rem; /* text-2xl equivalent */
+      font-weight: bold; /* Changed to bold */
+      line-height: 1.25; /* leading-tight equivalent */
+      margin-bottom: 1rem; /* Increased from 0.5rem to 1rem for more spacing */
       margin-top: 3rem;
-      margin-bottom: 1.5rem;
+      color: var(--foreground); /* text-foreground equivalent */
     }
 
     /* CV items layout */

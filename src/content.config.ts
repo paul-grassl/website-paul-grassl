@@ -54,4 +54,20 @@ const about = defineCollection({
   }),
 });
 
-export const collections = { exhibitions, works, about };
+const current = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: `./src/data/current` }),
+  schema: z.object({
+    // For current exhibition
+    title: z.string().optional(),
+    location: z.string().optional(),
+    locationUrl: z.string().optional(),
+    type: z.string().optional(),
+    period: z.string().optional(),
+    // For landing image
+    image: z.string().optional(),
+    caption: z.string().optional(),
+    alt: z.string().optional(),
+  }),
+});
+
+export const collections = { exhibitions, works, about, current };
