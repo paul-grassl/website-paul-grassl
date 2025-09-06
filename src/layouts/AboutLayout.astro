@@ -19,82 +19,80 @@ const { frontmatter } = Astro.props;
   <Header />
   <Breadcrumb />
   <main id="main-content">
-    <section id="about" class="app-prose mb-28 max-w-app prose-img:border-0">
+    <section id="about" class="app-prose mb-28 max-w-app prose-img:border-0 text-lg">
       <slot />
     </section>
   </main>
 
-  <style>
-    /* Studio photo styling - matching ichiban small landscape size */
-    #about img:first-of-type {
-      max-width: 20rem; /* max-w-xs equivalent - smaller than max-w-lg */
+  <style is:global>
+    /* Studio photo styling - simplified for Astro */
+    section#about img:first-of-type {
+      max-width: 32rem;
+      width: 100%;
+      height: auto;
       margin: 0 auto;
       display: block;
     }
 
-    /* Personal info styling - not italic */
-    #about em {
-      font-style: normal;
-      display: block;
-      margin-top: 2rem;
-      margin-bottom: 3rem;
-      line-height: 1.6;
-    }
 
     /* CV sections */
-    #about h2 {
+    section#about h2 {
       margin-top: 3rem;
       margin-bottom: 1.5rem;
     }
 
-    /* CV items - always flex row layout */
-    .cv-item {
+    /* CV items layout */
+    section#about .cv-item {
       display: flex;
-      flex-direction: row;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
       gap: 1rem;
-      align-items: flex-start;
     }
 
-    .cv-year {
+    section#about .cv-year {
       font-weight: normal;
       width: 8rem;
       flex-shrink: 0;
+      text-align: left;
+      color: inherit; /* Ensure it inherits the proper text color */
     }
 
-    .cv-content {
+    /* Ensure proper text color for CV years in dark mode */
+    html[data-theme="dark"] section#about .cv-year {
+      color: var(--foreground); /* Use theme's foreground color for dark mode */
+    }
+
+    section#about .cv-content {
       flex: 1;
       line-height: 1.6;
+      color: inherit; /* Ensure it inherits the proper text color */
     }
 
-    /* Exhibition titles should be italic */
-    .cv-content .exhibition-title {
-      font-style: italic;
-      display: block;
+    /* Ensure proper text color in dark mode for all CV content */
+    html[data-theme="dark"] section#about .cv-content {
+      color: var(--foreground); /* Use theme's foreground color for dark mode */
     }
 
-    /* Show type on new line, below exhibition title */
-    .cv-content .show-type {
-      display: block;
-      margin-top: 0.25rem;
+    /* Show type styling - responsive to light/dark mode */
+    section#about .cv-content .show-type {
+      color: #6b7280; /* text-gray-500 for light mode */
       font-size: 0.9em;
-      color: #6b7280; /* text-gray-500 equivalent */
     }
+
+    /* Dark mode styling */
+    html[data-theme="dark"] section#about .cv-content .show-type {
+      color: #9ca3af; /* text-gray-400 for dark mode - lighter gray */
+    }
+
 
     /* Mobile responsive adjustments */
     @media (max-width: 639px) {
-      .cv-item {
+      section#about .cv-item {
         flex-direction: column;
         gap: 0.25rem;
       }
-
-      .cv-year {
-        width: 100%;
-        margin-bottom: 0.25rem;
-      }
-
-      .cv-content {
-        margin-left: 0;
+      
+      section#about .cv-year {
+        width: auto;
       }
     }
   </style>

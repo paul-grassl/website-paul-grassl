@@ -8,5 +8,5 @@ isSeries: false
 image: "/assets/workImages/2022/PG_2022_50x60_crowd.jpg"
 orientation: "landscape"
 order: 9
-displaySize: "medium"
+displaySize: "small"
 ---

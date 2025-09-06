@@ -5,16 +5,15 @@ title: "About"
 
 ![Studio Photo](/assets/personalImages/PG_studio_photo_2025.jpg)
 
-*1993, Munich, Germany  
-Lives and works in Munich, Germany*
+\*1993, based in Munich, Germany  
 
 ## Education
 
 <div class="cv-item">
   <div class="cv-year">2021–ongoing</div>
   <div class="cv-content">
-    Academy of Fine Arts Munich, DE<br>
-    Diploma study program Fine Arts<br>
+    Akademie der Bildenden Künste München, DE<br>
+    Study program Fine Arts<br>
     Class: Prof. Anke Doberauer (Painting and Printmaking)
   </div>
 </div>
@@ -55,8 +54,7 @@ Lives and works in Munich, Germany*
 <div class="cv-item">
   <div class="cv-year">2004–2012</div>
   <div class="cv-content">
-    Käthe-Kollwitz-Gymnasium, Munich, DE<br>
-    Abitur grade: 1,7
+    Käthe-Kollwitz-Gymnasium, Munich, DE
   </div>
 </div>
 
@@ -65,8 +63,8 @@ Lives and works in Munich, Germany*
 <div class="cv-item">
   <div class="cv-year">2025</div>
   <div class="cv-content">
-    <span class="exhibition-title">Große Kunst Ausstellung</span>
-    <span class="show-type">group show</span>
+    <em>Große Kunst Ausstellung</em><br>
+    <span class="show-type">group show</span><br>
     Arbeitskreis 68, Wasserburg am Inn, DE
   </div>
 </div>
@@ -74,8 +72,8 @@ Lives and works in Munich, Germany*
 <div class="cv-item">
   <div class="cv-year">2025</div>
   <div class="cv-content">
-    <span class="exhibition-title">What makes a house a house</span>
-    <span class="show-type">solo show with guest artist</span>
+    <em>What makes a house a house</em><br>
+    <span class="show-type">solo show with guest artist</span><br>
     Kobo Chika Gallery, Tokyo, JP
   </div>
 </div>
@@ -83,8 +81,8 @@ Lives and works in Munich, Germany*
 <div class="cv-item">
   <div class="cv-year">2025</div>
   <div class="cv-content">
-    <span class="exhibition-title">Empty, but not abandoned</span>
-    <span class="show-type">solo show</span>
+    <em>Empty, but not abandoned</em><br>
+    <span class="show-type">solo show</span><br>
     MIDORI.so Gallery Nakameguro, Tokyo, JP
   </div>
 </div>
@@ -92,8 +90,8 @@ Lives and works in Munich, Germany*
 <div class="cv-item">
   <div class="cv-year">2024</div>
   <div class="cv-content">
-    <span class="exhibition-title">PINXIT</span>
-    <span class="show-type">group show</span>
+    <em>PINXIT</em><br>
+    <span class="show-type">group show</span><br>
     Catholic Academy of Bavaria, Munich, DE
   </div>
 </div>
@@ -101,8 +99,8 @@ Lives and works in Munich, Germany*
 <div class="cv-item">
   <div class="cv-year">2023</div>
   <div class="cv-content">
-    <span class="exhibition-title">Wo sind meine Grenzen?</span>
-    <span class="show-type">two-person show</span>
+    <em>Wo sind meine Grenzen?</em><br>
+    <span class="show-type">two-person show</span><br>
     Eckstein - Raum für zeitgenössische Kunst, Munich, DE
   </div>
 </div>
@@ -120,9 +118,7 @@ Lives and works in Munich, Germany*
 <div class="cv-item">
   <div class="cv-year">2023</div>
   <div class="cv-content">
-    Summeracademy Salzburg, AT<br>
-    Participant in the class "Patterns and Printmaking"<br>
-    Instructor: Hannah Tilson & Otis Blease
+    Summeracademy Salzburg, AT
   </div>
 </div>
 

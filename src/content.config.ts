@@ -47,4 +47,11 @@ const works = defineCollection({
     }),
 });
 
-export const collections = { exhibitions, works };
+const about = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: `./src/data/about` }),
+  schema: z.object({
+    title: z.string().default("About"),
+  }),
+});
+
+export const collections = { exhibitions, works, about };
