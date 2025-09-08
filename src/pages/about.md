@@ -118,7 +118,7 @@ title: "About"
 <div class="cv-item">
   <div class="cv-year">2023</div>
   <div class="cv-content">
-    Summeracademy Salzburg, AT
+    International Summeracademy of Fine Arts in Salzburg, AT
   </div>
 </div>
 

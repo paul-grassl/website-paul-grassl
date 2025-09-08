@@ -229,6 +229,7 @@ const description = `Artwork by Paul Graßl from ${year}`;
       }
       
       let currentSlide = 0;
+      let isTransitioning = false;
       
       function showSlide(index: number) {
         // Preserve scroll position more reliably
@@ -276,6 +277,9 @@ const description = `Artwork by Paul Graßl from ${year}`;
       }
       
       function nextSlide() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        
         // Prevent focus changes from causing scroll jumps
         const activeElement = document.activeElement as HTMLElement;
         currentSlide = (currentSlide + 1) % slides.length;
@@ -284,9 +288,16 @@ const description = `Artwork by Paul Graßl from ${year}`;
         if (activeElement) {
           activeElement.blur();
         }
+        
+        setTimeout(() => {
+          isTransitioning = false;
+        }, 300);
       }
       
       function prevSlide() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        
         // Prevent focus changes from causing scroll jumps
         const activeElement = document.activeElement as HTMLElement;
         currentSlide = (currentSlide - 1 + slides.length) % slides.length;
@@ -295,6 +306,10 @@ const description = `Artwork by Paul Graßl from ${year}`;
         if (activeElement) {
           activeElement.blur();
         }
+        
+        setTimeout(() => {
+          isTransitioning = false;
+        }, 300);
       }
       
       // Add click handlers for navigation (only for this container's nav elements)
