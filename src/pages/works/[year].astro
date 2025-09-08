@@ -38,7 +38,7 @@ const description = `Artwork by Paul Graßl from ${year}`;
           <div class="w-full">
             {work.data.isSeries ? (
               <!-- Series slideshow -->
-              <div class="work-series" data-work-title={work.data.title} data-technique={work.data.technique} data-size={work.data.size}>
+              <div class="work-series" data-work-title={work.data.title} data-technique={work.data.technique} data-size={work.data.size} data-slide-count={work.data.images?.length || 0}>
                 <div class="slideshow-container relative">
                   <div class="slides">
                     {work.data.images?.map((image, index) => (
@@ -60,7 +60,7 @@ const description = `Artwork by Paul Graßl from ${year}`;
                               quality={80}
                               format="webp"
                               densities={[1, 2]}
-                              loading="lazy"
+                              loading={index <= 1 ? "eager" : "lazy"}
                             />
                           </div>
                         </div>
@@ -125,8 +125,12 @@ const description = `Artwork by Paul Graßl from ${year}`;
                         ))}
                       </div>
                       
-                      <!-- Right side: Empty for balance -->
-                      <div class="w-16"></div>
+                      <!-- Right side: Mobile swipe indicator -->
+                      <div class="w-16 flex justify-end">
+                        <div class="swipe-indicator md:hidden text-gray-500 text-base" aria-hidden="true">
+                          →
+                        </div>
+                      </div>
                   </div>
                   
                   <!-- General work info -->
@@ -528,5 +532,19 @@ const description = `Artwork by Paul Graßl from ${year}`;
   
   .work-series .slideshow-container {
     overflow-anchor: none;
+  }
+  
+  /* Mobile swipe indicator */
+  .swipe-indicator {
+    opacity: 0.7;
+    font-size: 1.2rem;
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+  
+  /* Hide indicator for single-slide series */
+  .work-series[data-slide-count="1"] .swipe-indicator {
+    display: none;
   }
 </style>
