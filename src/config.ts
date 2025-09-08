@@ -1,10 +1,10 @@
 export const SITE = {
-  website: "https://astro-paper.pages.dev/", // replace this with your deployed domain
+  website: "https://paulgrassl.com", // replace this with your deployed domain
   author: "Paul Graßl",
   profile: "",
-  desc: "Artist portfolio showcasing contemporary paintings and drawings.",
+  desc: "Artist website showcasing contemporary paintings and drawings.",
   title: "Paul Graßl",
-  ogImage: "astropaper-og.jpg",
+  ogImage: "favicon/android-chrome-512x512.png",
   lightAndDarkMode: true,
   postPerIndex: 4,
   postPerPage: 4,

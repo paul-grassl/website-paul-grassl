@@ -107,7 +107,7 @@ const description = `Artwork by Paul Graßl from ${year}`;
                     } mx-auto flex justify-between items-start`}>
                       <!-- Left side: Order counter -->
                       <div class="slide-counter w-16">
-                        {work.data.images?.map((image, index) => (
+                        {work.data.images?.map((_, index) => (
                           <div class={`counter-item ${index === 0 ? 'block' : 'hidden'} text-base text-gray-500`} data-slide-index={index}>
                             {index + 1}/{work.data.images?.length || 0}
                           </div>
