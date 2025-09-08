@@ -2,7 +2,7 @@ export const SITE = {
   website: "https://paulgrassl.com", // replace this with your deployed domain
   author: "Paul Graßl",
   profile: "",
-  desc: "Artist website showcasing contemporary paintings and drawings.",
+  desc: "Artist website",
   title: "Paul Graßl",
   ogImage: "favicon/android-chrome-512x512.png",
   lightAndDarkMode: true,
