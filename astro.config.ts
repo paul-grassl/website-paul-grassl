@@ -24,7 +24,6 @@ export default defineConfig({
     remarkPlugins: [
       remarkToc,
       [remarkCollapse, { test: "Table of contents" }],
-      remarkDeflist,
     ],
     shikiConfig: {
       // For more themes, visit https://shiki.style/themes

@@ -1,7 +1,9 @@
 import type { APIRoute } from "astro";
-import { generateOgImageForSite } from "@/utils/generateOgImages";
 
-export const GET: APIRoute = async () =>
-  new Response(await generateOgImageForSite(), {
-    headers: { "Content-Type": "image/png" },
+export const GET: APIRoute = async () => {
+  // Temporarily disabled due to font loading issues
+  return new Response("OG Image generation temporarily disabled", {
+    status: 404,
+    headers: { "Content-Type": "text/plain" },
   });
+};
