@@ -63,6 +63,15 @@ title: "About"
 <div class="cv-item">
   <div class="cv-year">2025</div>
   <div class="cv-content">
+    <em>Karl & Faber Preis Ausstellung</em><br>
+    <span class="show-type">group show</span><br>
+    Karl & Faber, Munich, DE
+  </div>
+</div>
+
+<div class="cv-item">
+  <div class="cv-year">2025</div>
+  <div class="cv-content">
     <em>Große Kunst Ausstellung</em><br>
     <span class="show-type">group show</span><br>
     Arbeitskreis 68, Wasserburg am Inn, DE
