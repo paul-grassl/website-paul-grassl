@@ -1,0 +1,46 @@
+{
+  // Astro-spezifische Einstellungen
+  "astro.trace.server": "verbose",
+  "files.associations": {
+    "*.astro": "astro"
+  },
+  // Editor-Einstellungen
+  "editor.formatOnSave": true,
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  // TypeScript-Einstellungen
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  // Datei-Ausschlüsse für bessere Performance
+  "files.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.astro": true
+  },
+  // Search-Ausschlüsse
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.astro": true,
+    "**/pnpm-lock.yaml": true,
+    "**/public/pagefind": true
+  },
+  // Emmet für Astro
+  "emmet.includeLanguages": {
+    "astro": "html"
+  },
+  // GitHub Copilot
+  "github.copilot.enable": {
+    "*": true,
+    "astro": true,
+    "markdown": true
+  }
+}
