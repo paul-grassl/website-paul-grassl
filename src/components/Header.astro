@@ -30,7 +30,7 @@ const isActive = (path: string) => {
   </a>
   <div
     id="nav-container"
-    class="mx-auto flex max-w-5xl flex-col items-center justify-between sm:flex-row px-2"
+    class="mx-auto flex max-w-5xl flex-col items-center justify-between px-2 sm:flex-row"
   >
     <div
       id="top-nav-wrap"
@@ -60,25 +60,48 @@ const isActive = (path: string) => {
           id="menu-items"
           class:list={[
             "mt-4 grid w-44 grid-cols-2 place-content-center gap-2",
-            "[&>li>a]:block [&>li>a]:px-4 [&>li>a]:py-3 [&>li>a]:text-center [&>li>a]:font-medium [&>li>a]:text-xl [&>li>a]:hover:text-accent sm:[&>li>a]:px-3 sm:[&>li>a]:py-1",
+            "[&>li>a]:block [&>li>a]:px-4 [&>li>a]:py-3 [&>li>a]:text-center [&>li>a]:text-xl [&>li>a]:font-medium [&>li>a]:hover:text-accent sm:[&>li>a]:px-3 sm:[&>li>a]:py-1",
             "hidden",
             "sm:mt-0 sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0",
           ]}
         >
-          <li class="col-span-2 relative group">
-            <span class={`block px-4 py-3 text-center font-medium text-xl hover:text-accent sm:px-3 sm:py-1 cursor-pointer sm:cursor-default ${isActive("/works") ? "text-foreground" : "text-nav-inactive"}`}>
-              <a href="/works" class="sm:pointer-events-none">works</a>
+          <li class="group relative col-span-2">
+            <span
+              class={`block px-4 py-3 text-center font-medium text-xl hover:text-accent sm:px-3 sm:py-1 cursor-pointer lg:cursor-default ${isActive("/works") ? "text-foreground" : "text-nav-inactive"}`}
+            >
+              <a href="/works" class="lg:pointer-events-none">works</a>
             </span>
-            <!-- Dropdown for works years - desktop only -->
-            <div class="absolute top-full left-0 hidden sm:group-hover:block bg-background border border-border rounded-md shadow-lg z-50 min-w-[120px]">
-              <a href="/works/2025" class="block px-4 py-2 hover:bg-accent hover:text-accent-foreground">2025</a>
-              <a href="/works/2024" class="block px-4 py-2 hover:bg-accent hover:text-accent-foreground">2024</a>
-              <a href="/works/2023" class="block px-4 py-2 hover:bg-accent hover:text-accent-foreground">2023</a>
-              <a href="/works/2022" class="block px-4 py-2 hover:bg-accent hover:text-accent-foreground">2022</a>
+            <!-- Dropdown for works years - desktop only (lg and above) -->
+            <div
+              class="absolute top-full left-0 z-50 hidden min-w-[120px] rounded-md border border-border bg-background shadow-lg lg:group-hover:block"
+            >
+              <a
+                href="/works/2025"
+                class="hover:text-accent-foreground block px-4 py-2 hover:bg-accent"
+                >2025</a
+              >
+              <a
+                href="/works/2024"
+                class="hover:text-accent-foreground block px-4 py-2 hover:bg-accent"
+                >2024</a
+              >
+              <a
+                href="/works/2023"
+                class="hover:text-accent-foreground block px-4 py-2 hover:bg-accent"
+                >2023</a
+              >
+              <a
+                href="/works/2022"
+                class="hover:text-accent-foreground block px-4 py-2 hover:bg-accent"
+                >2022</a
+              >
             </div>
           </li>
           <li class="col-span-2">
-            <a href="/exhibitions" class:list={{ "active-nav": isActive("/exhibitions") }}>
+            <a
+              href="/exhibitions"
+              class:list={{ "active-nav": isActive("/exhibitions") }}
+            >
               exhibitions
             </a>
           </li>
@@ -87,8 +110,11 @@ const isActive = (path: string) => {
               about
             </a>
           </li>
-              <li class="col-span-2">
-            <a href="/contact" class:list={{ "active-nav": isActive("/contact") }}>
+          <li class="col-span-2">
+            <a
+              href="/contact"
+              class:list={{ "active-nav": isActive("/contact") }}
+            >
               contact
             </a>
           </li>
