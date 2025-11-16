@@ -60,7 +60,7 @@ const description = `Artwork by Paul Graßl from ${year}`;
                               quality={80}
                               format="webp"
                               densities={[1, 2]}
-                              loading="eager"
+                              loading={index < 3 ? "eager" : "lazy"}
                             />
                           </div>
                         </div>
@@ -193,6 +193,57 @@ const description = `Artwork by Paul Graßl from ${year}`;
       
       let currentSlide = 0;
       let isTransitioning = false;
+      let hasPreloaded = false;
+      
+      // Preload remaining images (index >= 3)
+      function preloadRemainingImages() {
+        if (hasPreloaded) return;
+        hasPreloaded = true;
+        
+        slides.forEach((slide, index) => {
+          if (index >= 3) {
+            const img = slide.querySelector('img');
+            if (img && img.loading === 'lazy') {
+              img.loading = 'eager';
+              // Force browser to start loading by resetting src
+              const src = img.src;
+              img.src = '';
+              img.src = src;
+            }
+          }
+        });
+      }
+      
+      // Method 1: Preload when slideshow becomes visible (Intersection Observer)
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            preloadRemainingImages();
+            observer.disconnect();
+          }
+        });
+      }, {
+        rootMargin: '100px' // Start preloading 100px before slideshow is visible
+      });
+      observer.observe(container);
+      
+      // Method 2: Preload on interaction (hover/touch)
+      const interactionTargets = [
+        ...Array.from(container.querySelectorAll('.title-arrow')),
+        container.querySelector('.slideshow-container')
+      ].filter(Boolean);
+      
+      interactionTargets.forEach(target => {
+        // Desktop: hover
+        target!.addEventListener('mouseenter', () => {
+          preloadRemainingImages();
+        }, { once: true });
+        
+        // Mobile: touch
+        target!.addEventListener('touchstart', () => {
+          preloadRemainingImages();
+        }, { once: true, passive: true });
+      });
       
       function showSlide(index: number) {
         // Preserve scroll position more reliably
@@ -235,6 +286,9 @@ const description = `Artwork by Paul Graßl from ${year}`;
         if (isTransitioning) return;
         isTransitioning = true;
         
+        // Trigger preload on first interaction
+        preloadRemainingImages();
+        
         // Prevent focus changes from causing scroll jumps
         const activeElement = document.activeElement as HTMLElement;
         currentSlide = (currentSlide + 1) % slides.length;
@@ -252,6 +306,9 @@ const description = `Artwork by Paul Graßl from ${year}`;
       function prevSlide() {
         if (isTransitioning) return;
         isTransitioning = true;
+        
+        // Trigger preload on first interaction
+        preloadRemainingImages();
         
         // Prevent focus changes from causing scroll jumps
         const activeElement = document.activeElement as HTMLElement;
