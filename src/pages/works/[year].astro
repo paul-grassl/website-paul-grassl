@@ -44,7 +44,7 @@ const description = `Artwork by Paul Graßl from ${year}`;
                     {work.data.images?.map((image, index) => (
                       <div class={`slide ${index === 0 ? 'active' : 'hidden'}`} data-slide-index={index}>
                         <div class={`${image.orientation === 'portrait' ? 'flex justify-center' : 'flex justify-center'}`}>
-                          <div class={`relative ${
+                          <div class={`image-container relative cursor-pointer ${
                             work.data.displaySize === 'small' 
                               ? (image.orientation === 'portrait' ? 'max-w-xs' : 'max-w-lg') 
                               : work.data.displaySize === 'large'
@@ -60,36 +60,12 @@ const description = `Artwork by Paul Graßl from ${year}`;
                               quality={80}
                               format="webp"
                               densities={[1, 2]}
-                              loading={index <= 4 ? "eager" : "lazy"}
+                              loading="eager"
                             />
                           </div>
                         </div>
                       </div>
                     ))}
-                  </div>
-                  
-                  <!-- Mobile navigation areas - contained within image -->
-                  <div class="absolute inset-0 flex z-10 md:hidden">
-                    <div class="w-1/2 h-full slide-nav-left cursor-pointer" data-direction="prev"></div>
-                    <div class="w-1/2 h-full slide-nav-right cursor-pointer" data-direction="next"></div>
-                  </div>
-                  
-                  <!-- Desktop navigation areas - extending beyond image -->
-                  <div class="absolute inset-x-0 inset-y-0 hidden md:flex z-10" style="left: -50vw; right: -50vw;">
-                    <div class="w-1/2 h-full slide-nav-left cursor-pointer" data-direction="prev"></div>
-                    <div class="w-1/2 h-full slide-nav-right cursor-pointer" data-direction="next"></div>
-                  </div>
-                  
-                  <!-- Navigation arrows - hidden on mobile -->
-                  <div class="nav-arrow nav-arrow-left fixed left-4 top-1/2 transform -translate-y-1/2 opacity-0 transition-opacity duration-200 z-20 pointer-events-none hidden md:block">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-gray-600">
-                      <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </div>
-                  <div class="nav-arrow nav-arrow-right fixed right-4 top-1/2 transform -translate-y-1/2 opacity-0 transition-opacity duration-200 z-20 pointer-events-none hidden md:block">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-gray-600">
-                      <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
                   </div>
                   
 
@@ -104,33 +80,23 @@ const description = `Artwork by Paul Graßl from ${year}`;
                         : work.data.displaySize === 'large'
                         ? (work.data.images?.[0]?.orientation === 'portrait' ? 'max-w-xl' : 'max-w-3xl')
                         : (work.data.images?.[0]?.orientation === 'portrait' ? 'max-w-lg' : 'max-w-2xl')
-                    } mx-auto flex justify-between items-start`}>
-                      <!-- Left side: Order counter -->
-                      <div class="slide-counter w-16">
-                        {work.data.images?.map((image, index) => (
-                          <div class={`counter-item ${index === 0 ? 'block' : 'hidden'} text-base text-gray-500`} data-slide-index={index}>
-                            {index + 1}/{work.data.images?.length || 0}
-                          </div>
-                        ))}
-                      </div>
+                    } mx-auto`}>
                       
-                      <!-- Center: Specific work info -->
-                      <div class="specific-info text-center flex-1">
-                        {work.data.images?.map((image, index) => (
-                          <div class={`specific-title ${index === 0 ? 'block' : 'hidden'}`} data-slide-index={index}>
-                            <span class="text-base italic text-foreground">
-                              {image.specificTitle || `Work ${index + 1}`}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                      
-                      <!-- Right side: Mobile swipe indicator -->
-                      <div class="w-16 flex justify-end">
-                        <div class="swipe-indicator md:hidden text-gray-500 text-base" aria-hidden="true">
-                          →
+                      <!-- Center: Specific work info with navigation arrows -->
+                      <div class="specific-info text-center flex items-center justify-center gap-x-4">
+                        <button type="button" class="title-arrow slide-nav-left" aria-label="Vorheriges Bild" data-direction="prev">←</button>
+                        <div class="flex-1">
+                          {work.data.images?.map((image, index) => (
+                            <div class={`specific-title ${index === 0 ? 'block' : 'hidden'}`} data-slide-index={index}>
+                              <span class="text-base italic text-foreground">
+                                {image.specificTitle || `Work ${index + 1}`}
+                              </span>
+                            </div>
+                          ))}
                         </div>
+                        <button type="button" class="title-arrow slide-nav-right" aria-label="Nächstes Bild" data-direction="next">→</button>
                       </div>
+                      
                   </div>
                   
                   <!-- General work info -->
@@ -219,9 +185,6 @@ const description = `Artwork by Paul Graßl from ${year}`;
       
       const slides = container.querySelectorAll('.slide');
       const specificTitles = container.querySelectorAll('.specific-title');
-      const counterItems = container.querySelectorAll('.counter-item');
-      const leftArrow = document.querySelector('.nav-arrow-left');
-      const rightArrow = document.querySelector('.nav-arrow-right');
       
       // Only proceed if we have slides
       if (slides.length === 0) {
@@ -238,7 +201,7 @@ const description = `Artwork by Paul Graßl from ${year}`;
         // Prevent any automatic scrolling
         document.body.style.overflowAnchor = 'none';
         
-        // Hide all slides, titles, and counters
+        // Hide all slides and titles
         slides.forEach(slide => {
           slide.classList.add('hidden');
           slide.classList.remove('active');
@@ -247,12 +210,8 @@ const description = `Artwork by Paul Graßl from ${year}`;
           title.classList.add('hidden');
           title.classList.remove('block');
         });
-        counterItems.forEach(counter => {
-          counter.classList.add('hidden');
-          counter.classList.remove('block');
-        });
         
-        // Show current slide, title, and counter
+        // Show current slide and title
         if (slides[index]) {
           slides[index].classList.remove('hidden');
           slides[index].classList.add('active');
@@ -260,10 +219,6 @@ const description = `Artwork by Paul Graßl from ${year}`;
         if (specificTitles[index]) {
           specificTitles[index].classList.remove('hidden');
           specificTitles[index].classList.add('block');
-        }
-        if (counterItems[index]) {
-          counterItems[index].classList.remove('hidden');
-          counterItems[index].classList.add('block');
         }
         
         // Use requestAnimationFrame to ensure DOM is updated before restoring scroll
@@ -340,27 +295,65 @@ const description = `Artwork by Paul Graßl from ${year}`;
         }
       }
 
-      // Add click and touch handlers for navigation
-      const containerNavElements = container.querySelectorAll('.slide-nav-left, .slide-nav-right');
-      containerNavElements.forEach(nav => {
-        // Click handlers
-        nav.addEventListener('click', (e) => {
+      // Add click handlers for navigation buttons (arrows next to title)
+      const navButtons = container.querySelectorAll('.slide-nav-left, .slide-nav-right');
+      navButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
           try {
-            e.preventDefault();
-            e.stopPropagation();
-            const direction = nav.getAttribute('data-direction');
+            e.stopPropagation(); // Prevent triggering image-half click
+            const direction = btn.getAttribute('data-direction');
             if (direction === 'next') {
               nextSlide();
             } else if (direction === 'prev') {
               prevSlide();
             }
           } catch (error) {
-            console.error('Click handler error:', error);
+            console.error('Button click error:', error);
           }
         });
         
-        // Touch handlers for swipe
-        nav.addEventListener('touchstart', (e) => {
+        // Keyboard navigation for buttons
+        btn.addEventListener('keydown', (e) => {
+          try {
+            const keyboardEvent = e as KeyboardEvent;
+            if (keyboardEvent.key === 'Enter' || keyboardEvent.key === ' ') {
+              e.preventDefault();
+              e.stopPropagation();
+              const direction = btn.getAttribute('data-direction');
+              if (direction === 'next') {
+                nextSlide();
+              } else if (direction === 'prev') {
+                prevSlide();
+              }
+            }
+          } catch (error) {
+            console.error('Button keyboard error:', error);
+          }
+        });
+      });
+      
+      // Add image-half click handlers
+      const imageContainers = container.querySelectorAll('.image-container');
+      imageContainers.forEach(imgContainer => {
+        imgContainer.addEventListener('click', (e) => {
+          try {
+            const mouseEvent = e as MouseEvent;
+            
+            const rect = (imgContainer as HTMLElement).getBoundingClientRect();
+            const midpoint = rect.left + rect.width / 2;
+            
+            if (mouseEvent.clientX < midpoint) {
+              prevSlide();
+            } else {
+              nextSlide();
+            }
+          } catch (error) {
+            console.error('Image click error:', error);
+          }
+        });
+        
+        // Touch handlers for swipe on image
+        imgContainer.addEventListener('touchstart', (e) => {
           try {
             const touchEvent = e as TouchEvent;
             startX = touchEvent.touches[0].clientX;
@@ -370,7 +363,7 @@ const description = `Artwork by Paul Graßl from ${year}`;
           }
         }, { passive: true });
         
-        nav.addEventListener('touchend', (e) => {
+        imgContainer.addEventListener('touchend', (e) => {
           try {
             const touchEvent = e as TouchEvent;
             endX = touchEvent.changedTouches[0].clientX;
@@ -380,51 +373,20 @@ const description = `Artwork by Paul Graßl from ${year}`;
             console.error('Touch end error:', error);
           }
         }, { passive: true });
-        
-        // Add hover handlers for arrows (desktop only)
-        nav.addEventListener('mouseenter', () => {
-          try {
-            const direction = nav.getAttribute('data-direction');
-            if (direction === 'next' && rightArrow) {
-              (rightArrow as HTMLElement).style.opacity = '1';
-            } else if (direction === 'prev' && leftArrow) {
-              (leftArrow as HTMLElement).style.opacity = '1';
-            }
-          } catch (error) {
-            console.error('Mouse enter error:', error);
+      });
+      
+      // Global keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        try {
+          const keyboardEvent = e as KeyboardEvent;
+          if (keyboardEvent.key === 'ArrowLeft') {
+            prevSlide();
+          } else if (keyboardEvent.key === 'ArrowRight') {
+            nextSlide();
           }
-        });
-        
-        nav.addEventListener('mouseleave', () => {
-          try {
-            if (leftArrow) (leftArrow as HTMLElement).style.opacity = '0';
-            if (rightArrow) (rightArrow as HTMLElement).style.opacity = '0';
-          } catch (error) {
-            console.error('Mouse leave error:', error);
-          }
-        });
-        
-        // Keyboard navigation
-        nav.setAttribute('tabindex', '0');
-        nav.setAttribute('role', 'button');
-        nav.setAttribute('aria-label', nav.getAttribute('data-direction') === 'next' ? 'Nächstes Bild' : 'Vorheriges Bild');
-        
-        nav.addEventListener('keydown', (e) => {
-          try {
-            const keyboardEvent = e as KeyboardEvent;
-            if (keyboardEvent.key === 'Enter' || keyboardEvent.key === ' ') {
-              e.preventDefault();
-              const direction = nav.getAttribute('data-direction');
-              if (direction === 'next') {
-                nextSlide();
-              } else if (direction === 'prev') {
-                prevSlide();
-              }
-            }
-          } catch (error) {
-            console.error('Keyboard navigation error:', error);
-          }
-        });
+        } catch (error) {
+          console.error('Keyboard navigation error:', error);
+        }
       });
       
       // Mark as initialized
@@ -489,25 +451,48 @@ const description = `Artwork by Paul Graßl from ${year}`;
     position: relative;
   }
   
-  .specific-title,
-  .counter-item {
-    transition: opacity 0.2s ease-in-out;
-  }
-  
-  .nav-arrow {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 50%;
-    padding: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .slide-nav-left,
-  .slide-nav-right {
+  .specific-title {
     transition: opacity 0.2s ease-in-out;
   }
   
   .slideshow-container {
     overflow: hidden;
+  }
+  
+  .image-container {
+    position: relative;
+  }
+  
+  /* Navigation arrow buttons next to title */
+  .title-arrow {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    line-height: 1;
+    color: rgb(107, 114, 128); /* text-gray-500 */
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: color 0.2s ease-in-out;
+    user-select: none;
+  }
+  
+  .title-arrow:hover {
+    color: var(--foreground);
+  }
+  
+  .title-arrow:focus {
+    outline: 2px solid #4a90e2;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  
+  .title-arrow:focus:not(:focus-visible) {
+    outline: none;
+  }
+  
+  /* Hide arrows for single-slide series */
+  .work-series[data-slide-count="1"] .title-arrow {
+    display: none;
   }
   
   /* Prevent horizontal scroll on mobile */
@@ -532,19 +517,5 @@ const description = `Artwork by Paul Graßl from ${year}`;
   
   .work-series .slideshow-container {
     overflow-anchor: none;
-  }
-  
-  /* Mobile swipe indicator */
-  .swipe-indicator {
-    opacity: 0.7;
-    font-size: 1.2rem;
-    line-height: 1;
-    user-select: none;
-    pointer-events: none;
-  }
-  
-  /* Hide indicator for single-slide series */
-  .work-series[data-slide-count="1"] .swipe-indicator {
-    display: none;
   }
 </style>
