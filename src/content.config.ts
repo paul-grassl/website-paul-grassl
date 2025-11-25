@@ -62,6 +62,7 @@ const current = defineCollection({
     location: z.string().optional(),
     locationUrl: z.string().optional(),
     type: z.string().optional(),
+    opening: z.string().optional(),
     period: z.string().optional(),
     // For landing image
     image: z.string().optional(),
