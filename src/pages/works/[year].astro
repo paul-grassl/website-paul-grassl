@@ -34,10 +34,9 @@ const description = `Artwork by Paul Graßl from ${year}`;
           <h1 class="text-2xl font-normal leading-tight mb-2 text-foreground">Works {year}</h1>
         </div>
 
-        {works.map((work) => (
+        {works.map((work, workIndex) => (
           <div class="w-full">
             {work.data.isSeries ? (
-              <!-- Series slideshow -->
               <div class="work-series" data-work-title={work.data.title} data-technique={work.data.technique} data-size={work.data.size} data-slide-count={work.data.images?.length || 0}>
                 <div class="slideshow-container relative">
                   <div class="slides">
@@ -60,7 +59,10 @@ const description = `Artwork by Paul Graßl from ${year}`;
                               quality={80}
                               format="webp"
                               densities={[1, 2]}
-                              loading={index < 3 ? "eager" : "lazy"}
+                              loading={(workIndex < 2 && index === 0) ? "eager" : "lazy"}
+                              fetchpriority={(workIndex === 0 && index === 0) ? "high" : "auto"}
+                              decoding="async"
+                              sizes={`(max-width: 768px) 100vw, ${image.orientation === 'portrait' ? '600px' : '900px'}`}
                             />
                           </div>
                         </div>
@@ -118,7 +120,6 @@ const description = `Artwork by Paul Graßl from ${year}`;
                 </div>
               </div>
             ) : (
-              <!-- Single work -->
               <div class="single-work">
                 <div class={`${work.data.orientation === 'portrait' ? 'flex justify-center' : 'flex justify-center'}`}>
                   <div class={`relative ${
@@ -138,6 +139,8 @@ const description = `Artwork by Paul Graßl from ${year}`;
                       format="webp"
                       densities={[1, 2]}
                       loading="lazy"
+                      decoding="async"
+                      sizes={`(max-width: 768px) 100vw, ${work.data.orientation === 'portrait' ? '600px' : '900px'}`}
                     />
                   </div>
                 </div>
@@ -176,6 +179,18 @@ const description = `Artwork by Paul Graßl from ${year}`;
       setTimeout(initSlideshows, 100);
       return;
     }
+
+    // Observer to trigger preloading only when slideshow is near viewport
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const container = entry.target;
+          // Trigger the custom event we attach below to start preloading
+          container.dispatchEvent(new CustomEvent('start-preload'));
+          observer.unobserve(container);
+        }
+      });
+    }, { rootMargin: "200px" }); // Start loading when 200px away
     
     seriesContainers.forEach(container => {
       // Skip if already initialized
@@ -193,56 +208,36 @@ const description = `Artwork by Paul Graßl from ${year}`;
       
       let currentSlide = 0;
       let isTransitioning = false;
-      let hasPreloaded = false;
       
-      // Preload remaining images (index >= 3)
-      function preloadRemainingImages() {
-        if (hasPreloaded) return;
-        hasPreloaded = true;
+      // Helper to preload a specific image by switching attributes
+      function preloadImage(imgElement: HTMLImageElement | null) {
+        if (!imgElement) return;
+        // If it's already loaded or eager, do nothing
+        if (imgElement.complete || imgElement.loading === 'eager') return;
         
-        slides.forEach((slide, index) => {
-          if (index >= 3) {
-            const img = slide.querySelector('img');
-            if (img && img.loading === 'lazy') {
-              img.loading = 'eager';
-              // Force browser to start loading by resetting src
-              const src = img.src;
-              img.src = '';
-              img.src = src;
-            }
-          }
-        });
+        // Force the browser to prioritize this image
+        imgElement.loading = 'eager';
       }
-      
-      // Method 1: Preload when slideshow becomes visible (Intersection Observer)
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            preloadRemainingImages();
-            observer.disconnect();
-          }
-        });
-      }, {
-        rootMargin: '100px' // Start preloading 100px before slideshow is visible
-      });
-      observer.observe(container);
-      
-      // Method 2: Preload on interaction (hover/touch)
-      const interactionTargets = [
-        ...Array.from(container.querySelectorAll('.title-arrow')),
-        container.querySelector('.slideshow-container')
-      ].filter(Boolean);
-      
-      interactionTargets.forEach(target => {
-        // Desktop: hover
-        target!.addEventListener('mouseenter', () => {
-          preloadRemainingImages();
-        }, { once: true });
-        
-        // Mobile: touch
-        target!.addEventListener('touchstart', () => {
-          preloadRemainingImages();
-        }, { once: true, passive: true });
+
+      // Preload next/prev images based on current index
+      function updatePreloadBuffer() {
+        // Calculate next index
+        const nextIndex = (currentSlide + 1) % slides.length;
+        // Calculate prev index (for reverse navigation)
+        const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+
+        // Find the img elements
+        const nextImg = slides[nextIndex]?.querySelector('img');
+        const prevImg = slides[prevIndex]?.querySelector('img');
+
+        // Trigger attribute swap
+        preloadImage(nextImg as HTMLImageElement);
+        preloadImage(prevImg as HTMLImageElement);
+      }
+
+      // Listen for the intersection observer event
+      container.addEventListener('start-preload', () => {
+        updatePreloadBuffer();
       });
       
       function showSlide(index: number) {
@@ -266,6 +261,9 @@ const description = `Artwork by Paul Graßl from ${year}`;
         if (slides[index]) {
           slides[index].classList.remove('hidden');
           slides[index].classList.add('active');
+          
+          // Trigger buffer update whenever slide changes
+          updatePreloadBuffer();
         }
         if (specificTitles[index]) {
           specificTitles[index].classList.remove('hidden');
@@ -286,9 +284,6 @@ const description = `Artwork by Paul Graßl from ${year}`;
         if (isTransitioning) return;
         isTransitioning = true;
         
-        // Trigger preload on first interaction
-        preloadRemainingImages();
-        
         // Prevent focus changes from causing scroll jumps
         const activeElement = document.activeElement as HTMLElement;
         currentSlide = (currentSlide + 1) % slides.length;
@@ -306,9 +301,6 @@ const description = `Artwork by Paul Graßl from ${year}`;
       function prevSlide() {
         if (isTransitioning) return;
         isTransitioning = true;
-        
-        // Trigger preload on first interaction
-        preloadRemainingImages();
         
         // Prevent focus changes from causing scroll jumps
         const activeElement = document.activeElement as HTMLElement;
@@ -347,8 +339,8 @@ const description = `Artwork by Paul Graßl from ${year}`;
               nextSlide();
             }
           }
-        } catch (error) {
-          console.error('Swipe handling error:', error);
+        } catch {
+          // Swipe handling error
         }
       }
 
@@ -364,8 +356,8 @@ const description = `Artwork by Paul Graßl from ${year}`;
             } else if (direction === 'prev') {
               prevSlide();
             }
-          } catch (error) {
-            console.error('Button click error:', error);
+          } catch {
+            // Button click error
           }
         });
         
@@ -383,8 +375,8 @@ const description = `Artwork by Paul Graßl from ${year}`;
                 prevSlide();
               }
             }
-          } catch (error) {
-            console.error('Button keyboard error:', error);
+          } catch {
+            // Button keyboard error
           }
         });
       });
@@ -404,8 +396,8 @@ const description = `Artwork by Paul Graßl from ${year}`;
             } else {
               nextSlide();
             }
-          } catch (error) {
-            console.error('Image click error:', error);
+          } catch {
+            // Image click error
           }
         });
         
@@ -415,8 +407,8 @@ const description = `Artwork by Paul Graßl from ${year}`;
             const touchEvent = e as TouchEvent;
             startX = touchEvent.touches[0].clientX;
             startY = touchEvent.touches[0].clientY;
-          } catch (error) {
-            console.error('Touch start error:', error);
+          } catch {
+            // Touch start error
           }
         }, { passive: true });
         
@@ -426,8 +418,8 @@ const description = `Artwork by Paul Graßl from ${year}`;
             endX = touchEvent.changedTouches[0].clientX;
             endY = touchEvent.changedTouches[0].clientY;
             handleSwipe();
-          } catch (error) {
-            console.error('Touch end error:', error);
+          } catch {
+            // Touch end error
           }
         }, { passive: true });
       });
@@ -441,10 +433,13 @@ const description = `Artwork by Paul Graßl from ${year}`;
           } else if (keyboardEvent.key === 'ArrowRight') {
             nextSlide();
           }
-        } catch (error) {
-          console.error('Keyboard navigation error:', error);
+        } catch {
+          // Keyboard navigation error
         }
       });
+      
+      // Start observing this container for scroll visibility
+      observer.observe(container);
       
       // Mark as initialized
       container.setAttribute('data-slideshow-initialized', 'true');
