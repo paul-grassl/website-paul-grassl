@@ -117,6 +117,14 @@ title: "About"
 ## Residencies
 
 <div class="cv-item">
+  <div class="cv-year">2026</div>
+  <div class="cv-content">
+    Courtyard Hiroo<br>
+    Tokyo, JP
+  </div>
+</div>
+
+<div class="cv-item">
   <div class="cv-year">2025</div>
   <div class="cv-content">
     SAKIA Artist in Residence<br>

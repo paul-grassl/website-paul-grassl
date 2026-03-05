@@ -37,6 +37,16 @@ This is an Astro-based portfolio website for Paul Grassl showcasing artworks and
 - Pages: lowercase with hyphens (e.g., `about.md`)
 - Data files: descriptive names in lowercase
 
+### Bilddatei-Namenskonvention (workImages)
+Dateinamen folgen dem Schema `PG_YYYY_HöheXBreite_titel.jpg`.
+- Maße sind in **Höhe × Breite** (europäische Kunstkonvention)
+- Daraus ergibt sich die `orientation`: Breite > Höhe → `landscape`, Höhe > Breite → `portrait`
+- Daraus kann auch `displaySize` abgeleitet werden (Richtwerte):
+  - bis ca. 60 cm → `small`
+  - bis ca. 100 cm → `medium`
+  - ab ca. 100 cm → `large`
+- Kommas in Dateinamen sind erlaubt (z. B. `48,8x56`), im Frontmatter `size` Dezimalpunkt verwenden (`48.8 x 56 cm`)
+
 ### TypeScript
 - Use TypeScript for type definitions
 - Define types inline or in separate `.d.ts` files
@@ -47,6 +57,7 @@ This is an Astro-based portfolio website for Paul Grassl showcasing artworks and
 - Typography styles in `src/styles/typography.css`
 - Prefer semantic HTML and modern CSS features
 - Use CSS custom properties for theming
+- Tailwind: use utility classes directly – **never use `@apply`**
 
 ### Content Management
 - Exhibition data in `src/data/exhibitions/`
@@ -94,3 +105,26 @@ This is an Astro-based portfolio website for Paul Grassl showcasing artworks and
 ## References
 - Check README.md for detailed project documentation
 - Astro documentation: https://docs.astro.build
+
+## Dokumentationspflege (README.md aktuell halten)
+
+Wichtig: README.md ist die primäre Architekturdokumentation – sowohl für den Entwickler als auch als Kontext für die KI-gestützte Pflege.
+
+**README aktualisieren, wenn sich ändert:**
+- Slideshow-Verhalten oder Image-Loading-Strategie (z. B. eager/lazy-Logik, IntersectionObserver-Schwellwerte)
+- Frontmatter-Felder einer Collection (neue Felder, geänderte Typen, neue Pflichtfelder)
+- Neue Seiten/Layouts oder grundlegend geänderte Seitenstruktur
+- Neue Komponenten mit eigener Logik oder Konfiguration
+- Änderungen an Routing-Konventionen oder Slug-Struktur
+- Änderungen an Build/Deploy-Konfiguration (netlify.toml, astro.config.ts)
+- Neue externe Abhängigkeiten oder geänderte Package-Manager-Befehle
+- Styling-System-Änderungen (neue CSS Custom Properties, Theming-Logik)
+
+**README NICHT aktualisieren für:**
+- Neue Werke, Ausstellungen oder andere Inhalte (`.md`-Dateien in `src/data/`)
+- Neue Bilddateien in `public/assets/`
+- Neue Jahresseiten (z. B. `works/2026/`) – das ist normaler Inhalt
+- Kleinere Bugfixes ohne Verhaltensänderung
+- Text-/Übersetzungskorrekturen
+
+Wenn du Code-Änderungen vorschlägst, die unter "README aktualisieren" fallen: Weise explizit darauf hin und schlage den genauen README-Abschnitt vor, der ergänzt werden soll.

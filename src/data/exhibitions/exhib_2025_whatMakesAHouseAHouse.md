@@ -1,5 +1,5 @@
 ---
-title: "What makes a house a house?"
+title: "What makes a house a house"
 location: "Kobo Chika Gallery, Tokyo, Japan"
 type: "Solo show with guest artist Hamada Architects"
 period: "April 4 – April 6, 2025"
