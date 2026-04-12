@@ -111,6 +111,7 @@ location: "Galerie / Ort"
 locationUrl: "https://..."  # optional, verlinkt den Ort
 type: "Solo show | Group show ..."
 opening: "March 7, 2026, 7pm"  # optional, Vernissage-Datum
+additionalInfo: "Midissage: March 14, 3-6pm"  # optional, weitere Termin-/Hinweiszeile
 period: "March 7 – March 28, 2026"
 ---
 ```

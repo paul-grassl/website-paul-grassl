@@ -58,6 +58,9 @@ const hasCurrentExhibitions = currentExhibitions.length > 0;
                       {exhibition.data.opening && (
                         <span>{exhibition.data.opening}</span>
                       )}
+                      {exhibition.data.additionalInfo && (
+                        <span>{exhibition.data.additionalInfo}</span>
+                      )}
                       {exhibition.data.period && (
                         <span>{exhibition.data.period}</span>
                       )}

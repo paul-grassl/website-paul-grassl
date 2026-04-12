@@ -1,8 +1,9 @@
 ---
-title: "Ich bin schön"
-location: "Pasinger Fabrik, Munich"
-locationUrl: "https://pasinger-fabrik.de/serien/ich-bin-schoen/"
-type: "Group show"
-opening: "Opening: 04.12.25, 19h"
-period: "05.12.25 – 29.03.2026"
+title: "Working with Fire and Steel"
+location: "NoDepression Room, Munich"
+locationUrl: "https://nodepressionroom.com/impressum/"
+type: "Duo show"
+opening: "Opening: 14.04.26, 18h"
+additionalInfo: "Midissage: 18.04.26, 15-18h"
+period: "Exhibition period: 15.04.26 – 21.04.2026"
 ---
