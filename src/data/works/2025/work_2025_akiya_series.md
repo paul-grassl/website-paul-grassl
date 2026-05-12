@@ -1,5 +1,5 @@
 ---
-title: "Akiya Series"
+title: "Akiya Serie"
 technique: "Silkscreen on paper"
 size: "109.1 x 78.8 cm"
 year: 2025

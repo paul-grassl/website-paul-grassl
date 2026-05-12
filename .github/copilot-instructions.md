@@ -38,13 +38,20 @@ This is an Astro-based portfolio website for Paul Grassl showcasing artworks and
 - Data files: descriptive names in lowercase
 
 ### Bilddatei-Namenskonvention (workImages)
-Dateinamen folgen dem Schema `PG_YYYY_HöheXBreite_titel.jpg`.
+Dateinamen folgen dem Schema `PG_YYYY_HöheXBreite_Technik_titel.jpg`.
+Wenn es mehrere Ansichten desselben Werks gibt, wird ein Suffix angehängt (z. B. `PG_YYYY_HöheXBreite_Technik_titel_frontal1.jpg`).
+Mögliche Suffixe in der korrekten Slideshow-Reihenfolge: `frontal1`, `frontal2`, `frontal3`, `sideLeft`, `sideRight`, `detail1`, `detail2`.
+
 - Maße sind in **Höhe × Breite** (europäische Kunstkonvention)
 - Daraus ergibt sich die `orientation`: Breite > Höhe → `landscape`, Höhe > Breite → `portrait`
 - Daraus kann auch `displaySize` abgeleitet werden (Richtwerte):
   - bis ca. 60 cm → `small`
   - bis ca. 100 cm → `medium`
   - ab ca. 100 cm → `large`
+- Technik-Kürzel:
+  - `OoC` = Oil on canvas
+  - `OnL` = Oil on linen
+  - `SoP` = Silkscreen on paper
 - Kommas in Dateinamen sind erlaubt (z. B. `48,8x56`), im Frontmatter `size` Dezimalpunkt verwenden (`48.8 x 56 cm`)
 
 ### TypeScript

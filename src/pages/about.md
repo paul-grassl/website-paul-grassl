@@ -61,6 +61,15 @@ title: "About"
 ## Exhibitions
 
 <div class="cv-item">
+  <div class="cv-year">2026</div>
+  <div class="cv-content">
+    <em>Working with Fire and Steel</em><br>
+    <span class="show-type">two-person show</span><br>
+    NoDepressionRoom, Munich, DE
+  </div>
+</div>
+
+<div class="cv-item">
   <div class="cv-year">2025</div>
   <div class="cv-content">
     <em>Karl & Faber Preis Ausstellung</em><br>
