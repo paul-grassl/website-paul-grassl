@@ -6,7 +6,7 @@ year: 2023
 slug: "printbook-2023"
 isSeries: true
 orientation: "landscape"
-order: 7
+order: 26
 displaySize: "large"
 images:
   - src: "/assets/workImages/2023/PG_2023_100x70_PaulsPrintBook_page1_2.jpg"

@@ -7,6 +7,6 @@ slug: "koerperwelt1-2023"
 isSeries: false
 image: "/assets/workImages/2023/PG_2023_120x100_Koerperwelt1.jpg"
 orientation: "portrait"
-order: 2
+order: 27
 displaySize: "large"
 ---

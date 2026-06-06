@@ -5,7 +5,7 @@ size: "41 x 32 cm"
 year: 2026
 slug: "3-8-akiyaserie-2026"
 isSeries: true
-order: 7
+order: 5
 displaySize: "medium"
 images:
   - src: "/assets/workImages/2026/PG_2026_41x32_OoL_3-8(AkiyaSerie)_frontal1.jpg"

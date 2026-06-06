@@ -7,6 +7,6 @@ slug: "kopf4-2022"
 isSeries: false
 image: "/assets/workImages/2022/PG_2022_120x100_Kopf4.jpg"
 orientation: "portrait"
-order: 4
+order: 31
 displaySize: "large"
 ---

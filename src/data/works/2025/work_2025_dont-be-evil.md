@@ -7,6 +7,6 @@ slug: "dont-be-evil-2025"
 isSeries: false
 image: "/assets/workImages/2025/PG_2025_46x56_don't-be-evil.jpg"
 orientation: "landscape"
-order: 4
+order: 17
 displaySize: "small"
 ---

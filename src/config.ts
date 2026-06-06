@@ -5,7 +5,7 @@ export const SITE = {
   desc: "Artist website",
   title: "Paul Graßl",
   ogImage: "favicon/android-chrome-512x512.png",
-  lightAndDarkMode: true,
+  lightAndDarkMode: false,
   postPerIndex: 4,
   postPerPage: 4,
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes

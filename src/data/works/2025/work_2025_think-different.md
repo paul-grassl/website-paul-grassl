@@ -7,6 +7,6 @@ slug: "think-different-2025"
 isSeries: false
 image: "/assets/workImages/2025/PG_2025_150x190_think-different.jpg"
 orientation: "landscape"
-order: 7
+order: 15
 displaySize: "large"
 ---

@@ -7,6 +7,6 @@ slug: "kopf1-2022"
 isSeries: false
 image: "/assets/workImages/2022/PG_2022_60x50_Kopf1.jpg"
 orientation: "portrait"
-order: 1
+order: 34
 displaySize: "medium"
 ---

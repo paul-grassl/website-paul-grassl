@@ -49,8 +49,6 @@ year: YYYY
 slug: "sprechender-slug-YYYY"
 # Reihenfolge innerhalb des Jahres (optional, Zahl aufsteigend)
 order: 1
-# Anzeigegröße: "small" | "medium" | "large" (optional, default: medium)
-displaySize: "medium"
 # EINE EINZELNE ARBEIT:
 # image: "/assets/workImages/YYYY/dateiname.jpg"
 # orientation: "portrait" | "landscape"
@@ -68,7 +66,6 @@ Hinweise:
 - Einzelarbeit: `image`, `orientation` verwenden (kein `images`-Array). `isSeries` muss **nicht** gesetzt werden (Default: `false`).
 - Serie: `images`-Array verwenden und `isSeries: true` setzen (Pflicht!). Beispiel siehe `src/data/works/2025/work_2025_akiya_series.md`.
 - Sortierung im Jahr über `order`.
-- Darstellung beeinflusst durch `displaySize` (small/medium/large).
 
 Die Seiten `works.astro` und `works/[year].astro` generieren sich automatisch neu.
 
@@ -129,7 +126,7 @@ period: "March 7 – March 28, 2026"
 - Desktop: Pfeiltasten (←/→) für Keyboard-Navigation
 - Debounce gegen zu schnelles Klicken
 - Tastatur: Enter/Space auf Navigationsflächen
-- Reihenfolge/Größe über Frontmatter (`order`, `displaySize`)
+- Reihenfolge der Werke kann global über das Frontmatter-Feld `order` gesteuert werden
 
 ### Image-Loading-Strategie (Stand: Nov 2025)
 Die Ladelogik ist bewusst optimiert und sollte bei Änderungen in README dokumentiert werden:

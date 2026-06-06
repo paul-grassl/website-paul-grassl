@@ -7,6 +7,6 @@ slug: "kopf7-2022"
 isSeries: false
 image: "/assets/workImages/2022/PG_2022_100x80_Kopf7.jpg"
 orientation: "portrait"
-order: 7
+order: 29
 displaySize: "large"
 ---

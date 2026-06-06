@@ -44,10 +44,6 @@ Mögliche Suffixe in der korrekten Slideshow-Reihenfolge: `frontal1`, `frontal2`
 
 - Maße sind in **Höhe × Breite** (europäische Kunstkonvention)
 - Daraus ergibt sich die `orientation`: Breite > Höhe → `landscape`, Höhe > Breite → `portrait`
-- Daraus kann auch `displaySize` abgeleitet werden (Richtwerte):
-  - bis ca. 60 cm → `small`
-  - bis ca. 100 cm → `medium`
-  - ab ca. 100 cm → `large`
 - Technik-Kürzel:
   - `OoC` = Oil on canvas
   - `OnL` = Oil on linen
@@ -130,8 +126,11 @@ Wichtig: README.md ist die primäre Architekturdokumentation – sowohl für den
 **README NICHT aktualisieren für:**
 - Neue Werke, Ausstellungen oder andere Inhalte (`.md`-Dateien in `src/data/`)
 - Neue Bilddateien in `public/assets/`
-- Neue Jahresseiten (z. B. `works/2026/`) – das ist normaler Inhalt
 - Kleinere Bugfixes ohne Verhaltensänderung
 - Text-/Übersetzungskorrekturen
 
 Wenn du Code-Änderungen vorschlägst, die unter "README aktualisieren" fallen: Weise explizit darauf hin und schlage den genauen README-Abschnitt vor, der ergänzt werden soll.
+
+### Fonts & Typography
+- Die Website verwendet `Satoshi` für Fließtext (`font-sans`) und `Clash Display` für Überschriften/Titel (`font-display`).
+- Die Schriftarten werden über das Fontshare CDN nativ ins `Layout.astro` geladen (`Layout.astro` -> `<link href="...fontshare.com...">`).

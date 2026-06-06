@@ -6,7 +6,7 @@ year: 2024
 slug: "akiya-drawings-2024"
 isSeries: true
 orientation: "portrait"
-order: 7
+order: 13
 displaySize: "medium"
 images:
   - src: "/assets/workImages/2024/PG_2024_35x25_2-1-15(Akiya_drawing).jpg"

@@ -6,7 +6,7 @@ year: 2024
 slug: "drucke-2402-2024"
 isSeries: true
 orientation: "portrait"
-order: 5
+order: 20
 displaySize: "large"
 images:
   - src: "/assets/workImages/2024/PG_2024_100x70_Druck_2402_01.jpg"

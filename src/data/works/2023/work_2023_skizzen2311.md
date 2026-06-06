@@ -6,7 +6,7 @@ year: 2023
 slug: "skizzen2311-2023"
 isSeries: true
 orientation: "landscape"
-order: 9
+order: 25
 displaySize: "small"
 images:
   - src: "/assets/workImages/2023/PG_2023_26x35_Skizze2311_1.jpg"

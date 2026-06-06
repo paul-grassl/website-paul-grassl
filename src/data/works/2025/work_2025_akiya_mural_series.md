@@ -5,7 +5,7 @@ size: "550 x 330 cm"
 year: 2025
 slug: "akiya-mural-series-2025"
 isSeries: true
-order: 3
+order: 12
 displaySize: "large"
 images:
   - src: "/assets/workImages/2025/PG_2025_Akiya_Mural_7-7-1_Middle.jpg"

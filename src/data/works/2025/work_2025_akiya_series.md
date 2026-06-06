@@ -5,7 +5,7 @@ size: "109.1 x 78.8 cm"
 year: 2025
 slug: "akiya-series-2025"
 isSeries: true
-order: 1
+order: 10
 displaySize: "large"
 images:
   - src: "/assets/workImages/2025/PG_2024-2025_109.1x78.8_4-3-7(Akiya).jpg"

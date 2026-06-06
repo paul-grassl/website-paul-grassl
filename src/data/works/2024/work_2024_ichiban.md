@@ -6,7 +6,7 @@ year: 2024
 slug: "ichiban-2024"
 isSeries: true
 orientation: "landscape"
-order: 6
+order: 19
 displaySize: "small"
 images:
   - src: "/assets/workImages/2024/PG_2024_20x13.5_Ichiban_1:6.jpeg"

@@ -26,6 +26,8 @@ html[data-theme="dark"] {
   --color-accent: var(--accent);
   --color-muted: var(--muted);
   --color-border: var(--border);
+  --font-sans: 'Satoshi', sans-serif;
+  --font-display: 'Clash Display', sans-serif;
 }
 
 @layer base {
@@ -39,7 +41,7 @@ html[data-theme="dark"] {
   }
   body {
     @apply flex min-h-svh flex-col bg-background text-foreground selection:bg-accent/75 selection:text-background;
-    font-family: 'EB Garamond', serif;
+    font-family: var(--font-sans);
     font-size: 18px; /* Larger base font size */
   }
   a,

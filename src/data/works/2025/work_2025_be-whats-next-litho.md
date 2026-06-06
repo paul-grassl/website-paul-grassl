@@ -7,6 +7,6 @@ slug: "be-whats-next-litho-2025"
 isSeries: false
 image: "/assets/workImages/2025/PG_2025_48,8x56_be-what's-next.jpg"
 orientation: "landscape"
-order: 5
+order: 18
 displaySize: "small"
 ---

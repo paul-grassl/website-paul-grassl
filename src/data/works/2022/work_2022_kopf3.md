@@ -7,6 +7,6 @@ slug: "kopf3-2022"
 isSeries: false
 image: "/assets/workImages/2022/PG_2022_97x80_Kopf3.jpg"
 orientation: "portrait"
-order: 3
+order: 32
 displaySize: "medium"
 ---

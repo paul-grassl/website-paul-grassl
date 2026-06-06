@@ -3,7 +3,6 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import Layout from "./Layout.astro";
-import { SITE } from "@/config";
 
 export interface Props {
   frontmatter: {
@@ -19,7 +18,7 @@ const { frontmatter } = Astro.props;
   <Header />
   <Breadcrumb />
   <main id="main-content">
-    <section id="about" class="mx-auto w-full max-w-5xl px-6 py-8 text-lg">
+    <section id="about" class="mx-auto w-full max-w-5xl px-6 py-8 text-base">
       <slot />
     </section>
   </main>
@@ -34,11 +33,10 @@ const { frontmatter } = Astro.props;
       display: block;
     }
 
-
     /* CV sections - styled like "Works 2025" title but bold */
     section#about h2 {
       font-size: 1.5rem; /* text-2xl equivalent */
-      font-weight: bold; /* Changed to bold */
+      font-weight: normal;
       line-height: 1.25; /* leading-tight equivalent */
       margin-bottom: 1rem; /* Increased from 0.5rem to 1rem for more spacing */
       margin-top: 3rem;
@@ -87,14 +85,13 @@ const { frontmatter } = Astro.props;
       color: #9ca3af; /* text-gray-400 for dark mode - lighter gray */
     }
 
-
     /* Mobile responsive adjustments */
     @media (max-width: 639px) {
       section#about .cv-item {
         flex-direction: column;
         gap: 0.25rem;
       }
-      
+
       section#about .cv-year {
         width: auto;
       }
