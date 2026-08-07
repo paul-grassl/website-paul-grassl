@@ -1,9 +1,9 @@
 # Paul Graßl – Website - Dokumentation
 
 ## Quick Start
-- Installation: `npm install`
-- Entwicklung: `npm run dev`
-- Build: `npm run build`
+- Installation: `pnpm install`
+- Entwicklung: `pnpm run dev`
+- Build: `pnpm run build`
 
 ## Technischer Stack
 - Astro 5 (SSG), View Transitions
