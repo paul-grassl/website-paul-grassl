@@ -25,8 +25,9 @@
   - `exhibitions/*.md`: Ausstellungen
   - `current/*.md`: Aktuelle Ausstellung / Landing-Bild
   - Hinweis: `about`-Collection ist konfiguriert, aber derzeit leer. Inhalt kommt aus `src/pages/about.md`.
+- `src/assets/`
+  - `workImages/YYYY/...`: Von Astro optimierte Bilder zu Arbeiten
 - `public/assets/`
-  - `workImages/YYYY/...`: Bilder zu Arbeiten
   - `exhibitionImages/...`: Bilder zu Ausstellungen
   - `favicon/...`: Favicons & `site.webmanifest`
 - `src/components/`: u.a. `Header.astro`, `Footer.astro`, `Hr.astro`
@@ -36,7 +37,7 @@
 ## Inhalte pflegen
 
 ### Neue Arbeit hinzufügen
-1. Bilddatei(en) nach `public/assets/workImages/YYYY/` kopieren.
+1. Bilddatei(en) nach `src/assets/workImages/YYYY/` kopieren.
    - Namensschema: `PG_YYYY_HöheXBreite_titel.jpg` (Maße = Höhe × Breite in cm)
 2. Markdown-Datei erstellen unter `src/data/works/YYYY/work_YYYY.md`:
 
@@ -50,14 +51,14 @@ slug: "sprechender-slug-YYYY"
 # Reihenfolge innerhalb des Jahres (optional, Zahl aufsteigend)
 order: 1
 # EINE EINZELNE ARBEIT:
-# image: "/assets/workImages/YYYY/dateiname.jpg"
+# image: "../../../assets/workImages/YYYY/dateiname.jpg"
 # orientation: "portrait" | "landscape"
 # ODER: SERIE (Slideshow)
 images:
-  - src: "/assets/workImages/YYYY/datei1.jpg"
+  - src: "../../../assets/workImages/YYYY/datei1.jpg"
     orientation: "portrait"
     specificTitle: "optional, z.B. 1/6"
-  - src: "/assets/workImages/YYYY/datei2.jpg"
+  - src: "../../../assets/workImages/YYYY/datei2.jpg"
     orientation: "portrait"
 ---
 ```

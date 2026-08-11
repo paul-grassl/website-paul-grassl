@@ -3,10 +3,10 @@ description: "Scans for new artwork images and generates their Markdown files in
 ---
 
 # Task
-Detect new images in a given year's folder from `public/assets/workImages/[YYYY]/` and create the corresponding Markdown files in `src/data/works/[YYYY]/`.
+Detect new images in a given year's folder from `src/assets/workImages/[YYYY]/` and create the corresponding Markdown files in `src/data/works/[YYYY]/`.
 
 # Rules & Process
-1. List all `.jpg` images in `public/assets/workImages/[YYYY]/`.
+1. List all `.jpg` images in `src/assets/workImages/[YYYY]/`.
 2. List all `.md` files in `src/data/works/[YYYY]/`.
 3. Compare the two lists to find which artworks do not have an `.md` file yet.
    - Use a combination of `titel`, `size`, and `technique` to match them. Strip out suffixes like `_frontal1`, `_detail1`.
@@ -40,7 +40,7 @@ size: "[Height] x [Width] cm"
 year: [YYYY]
 slug: "[titel_slug]-[YYYY]"
 isSeries: false
-image: "/assets/workImages/[YYYY]/[filename]"
+image: "../../../assets/workImages/[YYYY]/[filename]"
 orientation: "[landscape | portrait]"
 order: 1
 ---
@@ -57,9 +57,9 @@ slug: "[titel_slug]-[YYYY]"
 isSeries: true
 order: 1
 images:
-  - src: "/assets/workImages/[YYYY]/[filename_frontal1]"
+  - src: "../../../assets/workImages/[YYYY]/[filename_frontal1]"
     orientation: "[landscape | portrait]"
-  - src: "/assets/workImages/[YYYY]/[filename_sideLeft]"
+  - src: "../../../assets/workImages/[YYYY]/[filename_sideLeft]"
     orientation: "[landscape | portrait]"
 ---
 ```

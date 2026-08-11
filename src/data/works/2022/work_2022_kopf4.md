@@ -5,7 +5,7 @@ size: "120 x 100 cm"
 year: 2022
 slug: "kopf4-2022"
 isSeries: false
-image: "/assets/workImages/2022/PG_2022_120x100_Kopf4.jpg"
+image: "../../../assets/workImages/2022/PG_2022_120x100_Kopf4.jpg"
 orientation: "portrait"
 order: 31
 displaySize: "large"

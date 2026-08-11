@@ -8,10 +8,10 @@ isSeries: true
 order: 9
 displaySize: "medium"
 images:
-  - src: "/assets/workImages/2026/PG_2026_45x38_OoL_6-10-3(AkiyaSerie)_frontal1.jpg"
+  - src: "../../../assets/workImages/2026/PG_2026_45x38_OoL_6-10-3(AkiyaSerie)_frontal1.jpg"
     orientation: "portrait"
-  - src: "/assets/workImages/2026/PG_2026_45x38_OoL_6-10-3(AkiyaSerie)_sideLeft.jpg"
+  - src: "../../../assets/workImages/2026/PG_2026_45x38_OoL_6-10-3(AkiyaSerie)_sideLeft.jpg"
     orientation: "portrait"
-  - src: "/assets/workImages/2026/PG_2026_45x38_OoL_6-10-3(AkiyaSerie)_detail1.jpg"
+  - src: "../../../assets/workImages/2026/PG_2026_45x38_OoL_6-10-3(AkiyaSerie)_detail1.jpg"
     orientation: "portrait"
 ---

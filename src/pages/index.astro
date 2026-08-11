@@ -3,7 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import { getCollection } from "astro:content";
-// import { Image } from "astro:assets"; // Currently unused
+import { Image } from "astro:assets";
 
 // Load current exhibition and landing image data
 const currentData = await getCollection("current");
@@ -77,12 +77,18 @@ const hasCurrentExhibitions = currentExhibitions.length > 0;
             <div class="w-full">
               <div class="flex justify-center">
                 <div class="w-full max-w-2xl">
-                  <img
+                  <Image
                     src={landingImage.data.image}
                     alt={
                       landingImage.data.alt || "Current artwork by Paul Graßl"
                     }
-                    class="h-auto w-full"
+                    width={672}
+                    widths={[320, 672, 960, 1344]}
+                    sizes="(max-width: 720px) calc(100vw - 3rem), 672px"
+                    quality={80}
+                    format="webp"
+                    priority={!hasCurrentExhibitions}
+                    class="h-auto w-full bg-muted"
                   />
                   {landingImage.data.caption &&
                     landingImage.data.caption.trim() !== "" && (
