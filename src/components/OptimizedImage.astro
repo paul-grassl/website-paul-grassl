@@ -1,0 +1,59 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  width: number;
+  widths: number[];
+  sizes: string;
+  priority?: boolean;
+  fit?: "natural" | "cover";
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  width,
+  widths,
+  sizes,
+  priority = false,
+  fit = "natural",
+  class: className,
+} = Astro.props;
+---
+
+<Image
+  src={src}
+  alt={alt}
+  width={width}
+  widths={widths}
+  sizes={sizes}
+  quality={80}
+  format="webp"
+  priority={priority}
+  class:list={[
+    "optimized-image",
+    fit === "cover" ? "optimized-image--cover" : "optimized-image--natural",
+    className,
+  ]}
+/>
+
+<style>
+  .optimized-image {
+    display: block;
+    width: 100%;
+    background-color: var(--muted);
+  }
+
+  .optimized-image--natural {
+    height: auto;
+  }
+
+  .optimized-image--cover {
+    height: 100%;
+    object-fit: cover;
+  }
+</style>

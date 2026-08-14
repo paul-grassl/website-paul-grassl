@@ -3,18 +3,18 @@ import { glob } from "astro/loaders";
 
 const exhibitions = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: `./src/data/exhibitions` }),
-  schema: () =>
+  schema: ({ image }) =>
     z.object({
       title: z.string(),
       location: z.string(),
       type: z.string(),
       period: z.string(),
-      image: z.string(),
+      image: image(),
       slug: z.string(),
       images: z
         .array(
           z.object({
-            src: z.string(),
+            src: image(),
             orientation: z.enum(["landscape", "portrait"]).default("landscape"),
           })
         )

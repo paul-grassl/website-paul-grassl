@@ -3,9 +3,7 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-![Studio Photo](/assets/personalImages/PG_studio_photo_2025.jpg)
-
-\*1993, based in Munich, Germany  
+\*1993, based in Munich, Germany
 
 ## Education
 

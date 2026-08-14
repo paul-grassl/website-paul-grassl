@@ -1,9 +1,11 @@
 # GitHub Copilot Instructions for website-paul-grassl
 
 ## Project Overview
+
 This is an Astro-based portfolio website for Paul Grassl showcasing artworks and exhibitions.
 
 ## Tech Stack
+
 - **Framework**: Astro
 - **Styling**: CSS (custom styles in src/styles/)
 - **Package Manager**: pnpm
@@ -12,6 +14,7 @@ This is an Astro-based portfolio website for Paul Grassl showcasing artworks and
 ## Code Style & Conventions
 
 ### Astro Components
+
 - Use `.astro` file extension for Astro components
 - Follow Astro's component structure: frontmatter (---), then template
 - Prefer static generation over SSR when possible
@@ -20,12 +23,15 @@ This is an Astro-based portfolio website for Paul Grassl showcasing artworks and
 - Use Astro.props for passing data to components
 
 ### File Organization
+
 - Components go in `src/components/`
 - Pages go in `src/pages/`
 - Data files go in `src/data/`
-- Public assets go in `public/assets/`
+- Content images that Astro should optimize go in `src/assets/`
+- Only pass-through files that must keep a direct URL go in `public/`
 
 ### Routing
+
 - Utilize file-based routing in `src/pages/`
 - Use `[param].astro` for dynamic routes
 - Use `[...slug].astro` for catch-all routes
@@ -33,11 +39,13 @@ This is an Astro-based portfolio website for Paul Grassl showcasing artworks and
 - Handle 404s with `404.astro`
 
 ### Naming Conventions
+
 - Components: PascalCase (e.g., `BackButton.astro`)
 - Pages: lowercase with hyphens (e.g., `about.md`)
 - Data files: descriptive names in lowercase
 
 ### Bilddatei-Namenskonvention (workImages)
+
 Dateinamen folgen dem Schema `PG_YYYY_HöheXBreite_Technik_titel.jpg`.
 Wenn es mehrere Ansichten desselben Werks gibt, wird ein Suffix angehängt (z. B. `PG_YYYY_HöheXBreite_Technik_titel_frontal1.jpg`).
 Mögliche Suffixe in der korrekten Slideshow-Reihenfolge: `frontal1`, `frontal2`, `frontal3`, `sideLeft`, `sideRight`, `detail1`, `detail2`.
@@ -51,11 +59,13 @@ Mögliche Suffixe in der korrekten Slideshow-Reihenfolge: `frontal1`, `frontal2`
 - Kommas in Dateinamen sind erlaubt (z. B. `48,8x56`), im Frontmatter `size` Dezimalpunkt verwenden (`48.8 x 56 cm`)
 
 ### TypeScript
+
 - Use TypeScript for type definitions
 - Define types inline or in separate `.d.ts` files
 - Leverage Astro's built-in TypeScript support
 
 ### Styling
+
 - Use global styles from `src/styles/global.css`
 - Typography styles in `src/styles/typography.css`
 - Prefer semantic HTML and modern CSS features
@@ -63,6 +73,7 @@ Mögliche Suffixe in der korrekten Slideshow-Reihenfolge: `frontal1`, `frontal2`
 - Tailwind: use utility classes directly – **never use `@apply`**
 
 ### Content Management
+
 - Exhibition data in `src/data/exhibitions/`
 - Work data in `src/data/works/`
 - Use structured data files (JSON/YAML) for content
@@ -70,30 +81,34 @@ Mögliche Suffixe in der korrekten Slideshow-Reihenfolge: `frontal1`, `frontal2`
 - Use frontmatter in Markdown files for metadata
 
 ### Data Fetching
+
 - Use `Astro.props` for passing data to components
 - Use `getStaticPaths()` for build-time data fetching
 - Use `Astro.glob()` for working with local files
 - Implement proper error handling for data operations
 
 ## Best Practices
+
 1. Keep components simple and focused
 2. Use Astro's built-in image optimization
 3. Leverage static site generation for performance
 4. Follow accessibility guidelines
-5. Optimize assets before adding to public folder
+5. Store content images in `src/assets/` so Astro can optimize them at build time
 6. Use semantic HTML elements
 7. Keep frontmatter logic minimal
 
 ## Performance Optimization
+
 - Minimize client-side JavaScript; prefer static generation
-- Use client:* directives judiciously for partial hydration:
+- Use client:\* directives judiciously for partial hydration:
   - `client:load` - for immediately needed interactivity
-  - `client:idle` - for non-critical interactivity  
+  - `client:idle` - for non-critical interactivity
   - `client:visible` - for components that hydrate when visible
 - Implement lazy loading for images and assets
 - Leverage Astro's built-in asset optimization
 
 ## SEO & Accessibility
+
 - Use proper semantic HTML structure
 - Implement meta tags and canonical URLs
 - Ensure keyboard navigation for interactive elements
@@ -101,11 +116,13 @@ Mögliche Suffixe in der korrekten Slideshow-Reihenfolge: `frontal1`, `frontal2`
 - Optimize for Core Web Vitals (LCP, FID, CLS)
 
 ## Commands
+
 - `pnpm dev` - Start development server
 - `pnpm build` - Build for production
 - `pnpm preview` - Preview production build
 
 ## References
+
 - Check README.md for detailed project documentation
 - Astro documentation: https://docs.astro.build
 
@@ -114,6 +131,7 @@ Mögliche Suffixe in der korrekten Slideshow-Reihenfolge: `frontal1`, `frontal2`
 Wichtig: README.md ist die primäre Architekturdokumentation – sowohl für den Entwickler als auch als Kontext für die KI-gestützte Pflege.
 
 **README aktualisieren, wenn sich ändert:**
+
 - Slideshow-Verhalten oder Image-Loading-Strategie (z. B. eager/lazy-Logik, IntersectionObserver-Schwellwerte)
 - Frontmatter-Felder einer Collection (neue Felder, geänderte Typen, neue Pflichtfelder)
 - Neue Seiten/Layouts oder grundlegend geänderte Seitenstruktur
@@ -124,13 +142,15 @@ Wichtig: README.md ist die primäre Architekturdokumentation – sowohl für den
 - Styling-System-Änderungen (neue CSS Custom Properties, Theming-Logik)
 
 **README NICHT aktualisieren für:**
+
 - Neue Werke, Ausstellungen oder andere Inhalte (`.md`-Dateien in `src/data/`)
-- Neue Bilddateien in `public/assets/`
+- Neue Bilddateien in den bestehenden Unterordnern von `src/assets/`
 - Kleinere Bugfixes ohne Verhaltensänderung
 - Text-/Übersetzungskorrekturen
 
 Wenn du Code-Änderungen vorschlägst, die unter "README aktualisieren" fallen: Weise explizit darauf hin und schlage den genauen README-Abschnitt vor, der ergänzt werden soll.
 
 ### Fonts & Typography
+
 - Die Website verwendet `Satoshi` für Fließtext (`font-sans`) und `Clash Display` für Überschriften/Titel (`font-display`).
 - Die Schriftarten werden über das Fontshare CDN nativ ins `Layout.astro` geladen (`Layout.astro` -> `<link href="...fontshare.com...">`).
