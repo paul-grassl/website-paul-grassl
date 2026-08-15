@@ -191,8 +191,12 @@ const description = `Artwork by Paul Graßl`;
 </Layout>
 
 <script>
-  import { initWorksSlideshows } from "@/scripts/worksSlideshow";
+  import {
+    cleanupWorksSlideshows,
+    initWorksSlideshows,
+  } from "@/scripts/worksSlideshow";
 
+  document.addEventListener("astro:before-preparation", cleanupWorksSlideshows);
   document.addEventListener("astro:page-load", initWorksSlideshows);
 </script>
 

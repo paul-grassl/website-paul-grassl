@@ -1,5 +1,10 @@
 let cleanupCurrentPage: (() => void) | undefined;
 
+export function cleanupWorksSlideshows() {
+  cleanupCurrentPage?.();
+  cleanupCurrentPage = undefined;
+}
+
 function imageForSlide(slide: HTMLElement | undefined) {
   return slide?.querySelector<HTMLImageElement>("img[data-artwork-image]");
 }
@@ -23,8 +28,7 @@ async function prepareImage(
 }
 
 export function initWorksSlideshows() {
-  cleanupCurrentPage?.();
-  cleanupCurrentPage = undefined;
+  cleanupWorksSlideshows();
 
   const worksPage = document.querySelector<HTMLElement>("[data-page='works']");
   if (!worksPage) return;
@@ -59,7 +63,6 @@ export function initWorksSlideshows() {
       0,
       slides.findIndex(slide => slide.classList.contains("active"))
     );
-    let preloadStarted = false;
     let suppressClick = false;
     let touchStartX = 0;
     let touchStartY = 0;
@@ -75,25 +78,10 @@ export function initWorksSlideshows() {
 
     const prepareBuffer = () => {
       for (const index of neighboringIndices(currentSlide)) {
-        void prepareImage(imageForSlide(slides[index]));
-      }
-    };
-
-    const prepareSeries = async () => {
-      if (preloadStarted) return;
-      preloadStarted = true;
-
-      const immediate = new Set(neighboringIndices(currentSlide));
-      await Promise.all(
-        Array.from(immediate, index =>
-          prepareImage(imageForSlide(slides[index]))
-        )
-      );
-
-      for (let index = 0; index < slides.length; index += 1) {
-        if (signal.aborted) return;
-        if (immediate.has(index)) continue;
-        await prepareImage(imageForSlide(slides[index]), "low");
+        void prepareImage(
+          imageForSlide(slides[index]),
+          index === currentSlide ? "auto" : "low"
+        );
       }
     };
 
@@ -189,9 +177,7 @@ export function initWorksSlideshows() {
       );
     }
 
-    preloaders.set(container, () => {
-      void prepareSeries();
-    });
+    preloaders.set(container, prepareBuffer);
     observer.observe(container);
   }
 
