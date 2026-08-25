@@ -1,3 +1,4 @@
+@import "./fonts.css";
 @import "tailwindcss";
 @import "./typography.css";
 
@@ -26,8 +27,8 @@ html[data-theme="dark"] {
   --color-accent: var(--accent);
   --color-muted: var(--muted);
   --color-border: var(--border);
-  --font-sans: 'Satoshi', sans-serif;
-  --font-display: 'Clash Display', sans-serif;
+  --font-sans: "Satoshi", sans-serif;
+  --font-display: "Clash Display", sans-serif;
 }
 
 @layer base {
@@ -74,7 +75,9 @@ html[data-theme="dark"] {
 
 /* Style for the active navigation link */
 #nav-menu ul > li > a.active-nav {
-  color: var(--foreground); /* Use the theme's main text color (black in light mode) */
+  color: var(
+    --foreground
+  ); /* Use the theme's main text color (black in light mode) */
 }
 
 /* Custom navigation colors */

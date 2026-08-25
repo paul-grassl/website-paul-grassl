@@ -42,6 +42,26 @@ const { frontmatter } = Astro.props;
       margin: 0 auto 2rem;
     }
 
+    section#about .about-introduction {
+      max-width: 50rem;
+      width: 100%;
+      margin: 0;
+    }
+
+    section#about .about-meta {
+      margin: 0 0 2rem;
+    }
+
+    section#about .artist-statement {
+      display: grid;
+      gap: 0;
+      line-height: 1.6;
+    }
+
+    section#about .artist-statement p {
+      margin: 0;
+    }
+
     /* CV sections - styled like "Works 2025" title but bold */
     section#about h2 {
       font-size: 1.5rem; /* text-2xl equivalent */
