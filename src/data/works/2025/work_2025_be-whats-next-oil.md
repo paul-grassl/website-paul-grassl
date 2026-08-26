@@ -2,6 +2,9 @@
 title: "Be what's next"
 technique: "Oil on canvas"
 size: "120 x 160 cm"
+de:
+  technique: "Öl auf Leinwand"
+  size: "120 x 160 cm"
 year: 2025
 slug: "be-whats-next-oil-2025"
 isSeries: false

@@ -3,6 +3,11 @@ title: "Empty but not abandoned"
 location: "Midoriso Gallery - Nakameguro, Tokyo, Japan"
 type: "Solo show"
 period: "March 7 – March 13, 2025"
+de:
+  location: "MIDORI.so Gallery Nakameguro, Tokio, JP"
+  type: "Einzelausstellung"
+  period: "7. – 13. März 2025"
+  exhibitionViews: "Riomar McCartney, Paul Graßl"
 image: "../../assets/exhibitionImages/2025_emptyButNotAbandoned/exhib_2025_emptyButNotAbandoned_1.jpg"
 slug: "empty-but-not-abandoned"
 images:

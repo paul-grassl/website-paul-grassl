@@ -2,6 +2,9 @@
 title: "4-15-5 (Akiya Serie)"
 technique: "Oil on linen"
 size: "41 x 32 cm"
+de:
+  technique: "Öl auf Leinen"
+  size: "41 x 32 cm"
 year: 2026
 slug: "4-15-5-akiyaserie-2026"
 isSeries: true

@@ -2,6 +2,9 @@
 title: "Skizzen 2311"
 technique: "Oil, charcoal and ink on cardboard"
 size: "26 x 35 cm"
+de:
+  technique: "Öl, Kohle und Tusche auf Pappe"
+  size: "26 x 35 cm"
 year: 2023
 slug: "skizzen2311-2023"
 isSeries: true

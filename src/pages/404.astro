@@ -6,8 +6,8 @@ import LinkButton from "@/components/LinkButton.astro";
 import { SITE } from "@/config";
 ---
 
-<Layout title={`404 Not Found | ${SITE.title}`}>
-  <Header />
+<Layout title={`404 Not Found | ${SITE.title}`} hasTranslations={false}>
+  <Header showLanguageSwitch={false} />
 
   <main
     id="main-content"

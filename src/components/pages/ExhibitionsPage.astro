@@ -1,0 +1,86 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import OptimizedImage from "@/components/OptimizedImage.astro";
+import { getCollection } from "astro:content";
+import { getLocalizedPath, UI, type Locale } from "@/i18n";
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const labels = UI[locale];
+const exhibitions = (await getCollection("exhibitions")).sort((a, b) => {
+  const getStartDate = (period: string) => {
+    const [startPart] = period.split("–").map(part => part.trim());
+    const year = period.split(", ")[1];
+    return new Date(`${startPart}, ${year}`);
+  };
+
+  return (
+    getStartDate(b.data.period).getTime() -
+    getStartDate(a.data.period).getTime()
+  );
+});
+---
+
+<Layout
+  title={labels.pages.exhibitions}
+  description={labels.meta.exhibitions}
+  locale={locale}
+>
+  <Header locale={locale} />
+  <main id="main-content">
+    <section class="mx-auto flex w-full max-w-5xl flex-col px-6 py-8">
+      <h1
+        class="mb-12 font-display text-2xl leading-tight font-normal text-foreground"
+      >
+        {labels.pages.exhibitions}
+      </h1>
+      {
+        exhibitions.map((exhibition, index) => {
+          const data =
+            locale === "de"
+              ? { ...exhibition.data, ...exhibition.data.de }
+              : exhibition.data;
+
+          return (
+            <div class="mb-16 flex w-full flex-col items-center">
+              <a
+                href={getLocalizedPath(
+                  `/exhibitions/${exhibition.data.slug}`,
+                  locale
+                )}
+                class="group flex w-full cursor-pointer flex-col items-start"
+              >
+                <div class="aspect-[3/2] w-full overflow-hidden bg-muted">
+                  <OptimizedImage
+                    src={exhibition.data.image}
+                    alt={exhibition.data.title}
+                    width={976}
+                    widths={[480, 768, 1024, 1536, 2048]}
+                    sizes="(max-width: 1024px) calc(100vw - 3rem), 976px"
+                    priority={index === 0}
+                    fit="cover"
+                  />
+                </div>
+                <div class="mt-4 w-full">
+                  <h2 class="text-base leading-tight font-normal italic transition-colors group-hover:text-accent">
+                    {exhibition.data.title}
+                  </h2>
+                  <div class="text-muted-foreground mt-0.5 flex flex-col text-base leading-tight transition-colors group-hover:text-accent">
+                    <span>{data.location}</span>
+                    <span>{data.period}</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          );
+        })
+      }
+    </section>
+  </main>
+  <Footer locale={locale} />
+</Layout>

@@ -2,6 +2,10 @@
 title: "Akiya Drawing Series"
 technique: "Ink on paper"
 size: "35 x 25 cm"
+de:
+  title: "Akiya Zeichenserie"
+  technique: "Tusche auf Papier"
+  size: "35 x 25 cm"
 year: 2024
 slug: "akiya-drawings-2024"
 isSeries: true

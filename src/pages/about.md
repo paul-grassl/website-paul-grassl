@@ -1,6 +1,7 @@
 ---
 layout: ../layouts/AboutLayout.astro
 title: "About"
+lang: "en"
 ---
 
 <div class="about-introduction">

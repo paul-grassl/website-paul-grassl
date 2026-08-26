@@ -2,6 +2,7 @@
 import { ClientRouter } from "astro:transitions";
 import { PUBLIC_GOOGLE_SITE_VERIFICATION } from "astro:env/client";
 import { SITE } from "@/config";
+import { getLocaleFromPathname, getLocalizedPath, type Locale } from "@/i18n";
 import "@/styles/global.css";
 
 export interface Props {
@@ -14,6 +15,8 @@ export interface Props {
   pubDatetime?: Date;
   modDatetime?: Date | null;
   scrollSmooth?: boolean;
+  locale?: Locale;
+  hasTranslations?: boolean;
 }
 
 const {
@@ -26,17 +29,30 @@ const {
   pubDatetime,
   modDatetime,
   scrollSmooth = false,
+  locale: localeProp,
+  hasTranslations = true,
 } = Astro.props;
+
+const locale = localeProp ?? getLocaleFromPathname(Astro.url.pathname);
 
 const browserTitle =
   title === SITE.title ? SITE.author : `${SITE.author} | ${title}`;
 
 const socialImageURL = new URL(ogImage, Astro.url);
+const englishURL = new URL(
+  getLocalizedPath(Astro.url.pathname, "en"),
+  Astro.site ?? Astro.url
+);
+const germanURL = new URL(
+  getLocalizedPath(Astro.url.pathname, "de"),
+  Astro.site ?? Astro.url
+);
 
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   headline: `${title}`,
+  inLanguage: locale,
   image: `${socialImageURL}`,
   datePublished: `${pubDatetime?.toISOString()}`,
   ...(modDatetime && { dateModified: modDatetime.toISOString() }),
@@ -51,11 +67,7 @@ const structuredData = {
 ---
 
 <!doctype html>
-<html
-  dir={SITE.dir}
-  lang=`${SITE.lang ?? "en"}`
-  class={`${scrollSmooth && "scroll-smooth"}`}
->
+<html dir={SITE.dir} lang={locale} class={`${scrollSmooth && "scroll-smooth"}`}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -83,6 +95,15 @@ const structuredData = {
 
     <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
     <link rel="canonical" href={canonicalURL} />
+    {
+      hasTranslations && (
+        <>
+          <link rel="alternate" hreflang="en" href={englishURL} />
+          <link rel="alternate" hreflang="de" href={germanURL} />
+          <link rel="alternate" hreflang="x-default" href={englishURL} />
+        </>
+      )
+    }
     <meta name="generator" content={Astro.generator} />
 
     <!-- General Meta Tags -->
@@ -97,6 +118,7 @@ const structuredData = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={socialImageURL} />
+    <meta property="og:locale" content={locale === "de" ? "de_DE" : "en_US"} />
 
     <!-- Article Published/Modified time -->
     {

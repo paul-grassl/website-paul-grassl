@@ -3,6 +3,11 @@ title: "Wo sind meine Grenzen?"
 location: "ECKSTEIN - Raum für zeitgenössische Kunst, Munich, Germany"
 type: "Two-person show with Bastian Maria Meindl"
 period: "June 30 – July 30, 2023"
+de:
+  location: "Eckstein - Raum für zeitgenössische Kunst, München, DE"
+  type: "Duo-Ausstellung mit Bastian Maria Meindl"
+  period: "30. Juni – 30. Juli 2023"
+  exhibitionViews: "Paul Graßl"
 image: "../../assets/exhibitionImages/2023_woSindMeineGrenzen/exhib_2023_woSindMeineGrenzen_1.jpg"
 slug: "wo-sind-meine-grenzen"
 images:

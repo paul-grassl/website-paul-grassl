@@ -2,6 +2,9 @@
 title: "Don't be evil"
 technique: "Oil on canvas"
 size: "100 x 155 cm"
+de:
+  technique: "Öl auf Leinwand"
+  size: "100 x 155 cm"
 year: 2026
 slug: "dont-be-evil-2026"
 isSeries: true

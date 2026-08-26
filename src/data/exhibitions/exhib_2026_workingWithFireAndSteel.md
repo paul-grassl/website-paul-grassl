@@ -3,6 +3,11 @@ title: "Working with Fire and Steel"
 location: "NoDepressionRoom, Munich, Germany"
 type: "Two-person show with Anna Wandaller"
 period: "April 15 – April 21, 2026"
+de:
+  location: "NoDepressionRoom, München, DE"
+  type: "Duo-Ausstellung mit Anna Wandaller"
+  period: "15. – 21. April 2026"
+  exhibitionViews: "Anna Wandaller, Paul Graßl"
 image: "../../assets/exhibitionImages/2026_workingWithFireAndSteel/exhib_2026_workingWithFireAndSteel_1.jpg"
 slug: "working-with-fire-and-steel"
 images:

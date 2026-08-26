@@ -2,6 +2,9 @@
 title: "6-10-3 (Akiya Serie)"
 technique: "Oil on linen"
 size: "45 x 38 cm"
+de:
+  technique: "Öl auf Leinen"
+  size: "45 x 38 cm"
 year: 2026
 slug: "6-10-3-akiyaserie-2026"
 isSeries: true

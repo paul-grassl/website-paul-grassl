@@ -2,6 +2,9 @@
 title: "Kopf 4"
 technique: "Graphite and ink on canvas"
 size: "120 x 100 cm"
+de:
+  technique: "Graphit und Tusche auf Leinwand"
+  size: "120 x 100 cm"
 year: 2022
 slug: "kopf4-2022"
 isSeries: false

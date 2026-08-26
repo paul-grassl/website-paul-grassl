@@ -1,0 +1,301 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import ArtworkImage from "@/components/ArtworkImage.astro";
+import { getCollection } from "astro:content";
+import { UI, type Locale } from "@/i18n";
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const labels = UI[locale];
+const allWorks = await getCollection("works");
+const works = allWorks.sort(
+  (a, b) => (a.data.order || 0) - (b.data.order || 0)
+);
+---
+
+<Layout
+  title={labels.pages.works}
+  description={labels.meta.works}
+  locale={locale}
+>
+  <Header locale={locale} />
+  <main id="main-content" data-page="works">
+    <section class="mx-auto w-full max-w-5xl px-6 py-8">
+      <div class="flex flex-col gap-y-8">
+        <div class="w-full">
+          <h1
+            class="mb-2 font-display text-2xl leading-tight font-normal text-foreground"
+          >
+            {labels.pages.works}
+          </h1>
+        </div>
+
+        {
+          works.map((work, workIndex) => {
+            const seriesImages = work.data.images ?? [];
+            const getSpecificTitle = (image: (typeof seriesImages)[number]) =>
+              locale === "de"
+                ? image.specificTitleDe || image.specificTitle
+                : image.specificTitle;
+            const hasSpecificTitles = seriesImages.some(
+              image => (getSpecificTitle(image) ?? "").trim() !== ""
+            );
+            const seriesOrientation =
+              seriesImages[0]?.orientation ?? "landscape";
+            const seriesWidthClass =
+              seriesOrientation === "portrait" ? "max-w-xl" : "max-w-4xl";
+            const seriesRatios = seriesImages.map(
+              image => image.src.width / image.src.height
+            );
+            const seriesAspectRatio = seriesRatios.length
+              ? Math.min(...seriesRatios)
+              : 1;
+            const technique =
+              locale === "de" ? work.data.de.technique : work.data.technique;
+            const size = locale === "de" ? work.data.de.size : work.data.size;
+            const title =
+              locale === "de"
+                ? work.data.de.title || work.data.title
+                : work.data.title;
+
+            return (
+              <div class="w-full">
+                {work.data.isSeries ? (
+                  <div
+                    class="work-series"
+                    data-work-title={title}
+                    data-technique={technique}
+                    data-size={size}
+                    data-slide-count={seriesImages.length}
+                  >
+                    <div class="slideshow-container relative">
+                      <div
+                        class={`slideshow-stage ${seriesWidthClass} mx-auto`}
+                        style={`--series-aspect-ratio: ${seriesAspectRatio}`}
+                      >
+                        <div class="slides">
+                          {seriesImages.map((image, index) => (
+                            <div
+                              class={`slide ${index === 0 ? "active" : "hidden"}`}
+                              data-slide-index={index}
+                              aria-hidden={index === 0 ? "false" : "true"}
+                            >
+                              <div class="image-container">
+                                <ArtworkImage
+                                  src={image.src}
+                                  alt={
+                                    hasSpecificTitles
+                                      ? `${title} - ${getSpecificTitle(image) || `Work ${index + 1}`}`
+                                      : title
+                                  }
+                                  orientation={image.orientation}
+                                  priority={workIndex === 0 && index === 0}
+                                />
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="mt-2">
+                      <div class={`${seriesWidthClass} mx-auto`}>
+                        <div class="specific-info flex items-start justify-center gap-x-4 text-center">
+                          <button
+                            type="button"
+                            class="title-arrow slide-nav-left"
+                            aria-label={labels.accessibility.previousImage}
+                            data-direction="prev"
+                          >
+                            ←
+                          </button>
+                          <div class="flex-1">
+                            {hasSpecificTitles ? (
+                              seriesImages.map((image, index) => (
+                                <div
+                                  class={`specific-title ${index === 0 ? "block" : "hidden"}`}
+                                  data-slide-index={index}
+                                >
+                                  {getSpecificTitle(image) && (
+                                    <span class="text-sm leading-snug text-foreground italic sm:text-base sm:leading-tight">
+                                      {getSpecificTitle(image)}
+                                    </span>
+                                  )}
+                                </div>
+                              ))
+                            ) : (
+                              <div>
+                                <div class="text-sm leading-snug text-foreground italic sm:text-base sm:leading-tight">
+                                  {title}
+                                </div>
+                                <div class="text-muted-foreground mt-0.5 flex flex-col gap-y-0 text-sm leading-tight sm:text-base">
+                                  <span>{technique}</span>
+                                  <span>{size}</span>
+                                  <span>{work.data.year}</span>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                          <button
+                            type="button"
+                            class="title-arrow slide-nav-right"
+                            aria-label={labels.accessibility.nextImage}
+                            data-direction="next"
+                          >
+                            →
+                          </button>
+                        </div>
+                      </div>
+
+                      {hasSpecificTitles && (
+                        <div class="general-info mt-2 sm:mt-3">
+                          <div
+                            class={`${seriesOrientation === "portrait" ? "max-w-xl" : "max-w-3xl"} mx-auto text-center`}
+                          >
+                            <h3 class="text-sm leading-snug font-normal text-foreground italic sm:text-base sm:leading-tight">
+                              {title}
+                            </h3>
+                            <div class="text-muted-foreground mt-0.5 flex flex-col gap-y-0 text-sm leading-tight sm:text-base">
+                              <span>{technique}</span>
+                              <span>{size}</span>
+                              <span>{work.data.year}</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <div class="single-work">
+                    <div class="flex justify-center">
+                      <div
+                        class={`relative w-full ${work.data.orientation === "portrait" ? "max-w-xl" : "max-w-4xl"} mx-auto`}
+                      >
+                        <ArtworkImage
+                          src={work.data.image!}
+                          alt={title}
+                          orientation={work.data.orientation}
+                          priority={workIndex === 0}
+                        />
+                      </div>
+                    </div>
+
+                    <div
+                      class={`mt-2 text-center ${work.data.orientation === "portrait" ? "max-w-xl" : "max-w-4xl"} mx-auto`}
+                    >
+                      <h3 class="text-sm leading-snug font-normal text-foreground italic sm:text-base sm:leading-tight">
+                        {title}
+                      </h3>
+                      <div class="text-muted-foreground mt-0.5 flex flex-col gap-y-0 text-sm leading-tight sm:text-base">
+                        <span>{technique}</span>
+                        <span>{size}</span>
+                        <span>{work.data.year}</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })
+        }
+      </div>
+    </section>
+  </main>
+  <Footer locale={locale} />
+</Layout>
+
+<script>
+  import {
+    cleanupWorksSlideshows,
+    initWorksSlideshows,
+  } from "@/scripts/worksSlideshow";
+
+  document.addEventListener("astro:before-preparation", cleanupWorksSlideshows);
+  document.addEventListener("astro:page-load", initWorksSlideshows);
+</script>
+
+<style>
+  .slideshow-stage {
+    width: 100%;
+  }
+
+  .slides {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--series-aspect-ratio);
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    overflow-anchor: none;
+  }
+
+  .specific-title {
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .slideshow-container {
+    overflow: hidden;
+  }
+
+  .image-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    touch-action: pan-y;
+    user-select: none;
+  }
+
+  .work-series:not([data-slide-count="1"]) .image-container {
+    cursor: pointer;
+  }
+
+  .image-container :global(img[data-artwork-image]) {
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .title-arrow {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    line-height: 1;
+    color: rgb(107, 114, 128);
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: color 0.2s ease-in-out;
+    user-select: none;
+  }
+
+  .title-arrow:hover {
+    color: var(--foreground);
+  }
+
+  .title-arrow:focus {
+    outline: 2px solid #4a90e2;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .title-arrow:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  .work-series[data-slide-count="1"] .title-arrow {
+    display: none;
+  }
+
+  .work-series {
+    overflow: hidden;
+    overflow-anchor: none;
+  }
+</style>

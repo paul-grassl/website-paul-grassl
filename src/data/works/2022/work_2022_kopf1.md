@@ -2,6 +2,9 @@
 title: "Kopf 1"
 technique: "Oil, linen, acrylic on canvas"
 size: "60 x 50 cm"
+de:
+  technique: "Öl, Leinen und Acryl auf Leinwand"
+  size: "60 x 50 cm"
 year: 2022
 slug: "kopf1-2022"
 isSeries: false
