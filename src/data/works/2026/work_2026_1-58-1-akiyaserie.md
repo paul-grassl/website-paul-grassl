@@ -2,6 +2,9 @@
 title: "1-58-1 (Akiya Serie)"
 technique: "Oil on canvas"
 size: "41 x 32 cm"
+de:
+  technique: "Öl auf Leinwand"
+  size: "41 x 32 cm"
 year: 2026
 slug: "1-58-1-akiyaserie-2026"
 isSeries: true

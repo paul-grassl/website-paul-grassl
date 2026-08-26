@@ -2,6 +2,9 @@
 title: "Don't be evil"
 technique: "Lithography on paper"
 size: "46 x 56 cm"
+de:
+  technique: "Lithographie auf Papier"
+  size: "46 x 56 cm"
 year: 2025
 slug: "dont-be-evil-2025"
 isSeries: false

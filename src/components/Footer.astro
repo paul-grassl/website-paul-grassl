@@ -1,24 +1,32 @@
 ---
 import Hr from "./Hr.astro";
-
+import { getLocaleFromPathname, getLocalizedPath, type Locale } from "@/i18n";
 
 export interface Props {
   noMarginTop?: boolean;
+  locale?: Locale;
 }
 
-const { noMarginTop = false } = Astro.props;
+const {
+  noMarginTop = false,
+  locale = getLocaleFromPathname(Astro.url.pathname),
+} = Astro.props;
 ---
 
 <footer class:list={["w-full", { "mt-auto": !noMarginTop }]}>
   <Hr noPadding={true} />
   <div class="mx-auto w-full max-w-5xl px-2">
-    <div
-      class="flex flex-col items-center justify-center py-6 sm:py-4"
-    >
-      <div class="text-lg text-muted-foreground flex items-center gap-4">
+    <div class="flex flex-col items-center justify-center py-6 sm:py-4">
+      <div class="text-muted-foreground flex items-center gap-4 text-lg">
         <span>&#169; Paul Graßl</span>
-        <a href="/impressum" class="hover:text-accent">Impressum</a>
-        <a href="/datenschutz" class="hover:text-accent">Datenschutz</a>
+        <a
+          href={getLocalizedPath("/impressum", locale)}
+          class="hover:text-accent">Impressum</a
+        >
+        <a
+          href={getLocalizedPath("/datenschutz", locale)}
+          class="hover:text-accent">Datenschutz</a
+        >
       </div>
     </div>
   </div>

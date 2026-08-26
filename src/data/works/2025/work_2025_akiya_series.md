@@ -1,8 +1,11 @@
 ---
 title: "Akiya Serie"
-technique: "Silkscreen on paper"
+technique: "Silkscreen on Kent paper"
 size: "109.1 x 78.8 cm"
-year: 2025
+de:
+  technique: "Siebdruck auf Kent-Papier"
+  size: "109,1 x 78,8 cm"
+year: "2024-2025"
 slug: "akiya-series-2025"
 isSeries: true
 order: 10

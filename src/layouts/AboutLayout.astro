@@ -4,27 +4,35 @@ import Footer from "@/components/Footer.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import OptimizedImage from "@/components/OptimizedImage.astro";
 import studioPhoto from "@/assets/personalImages/PG_studio_photo_2025.jpg";
+import { getLocaleFromPathname, UI, type Locale } from "@/i18n";
 import Layout from "./Layout.astro";
 
 export interface Props {
   frontmatter: {
     title: string;
     description?: string;
+    lang?: Locale;
   };
 }
 
 const { frontmatter } = Astro.props;
+const locale = frontmatter.lang ?? getLocaleFromPathname(Astro.url.pathname);
+const labels = UI[locale];
 ---
 
-<Layout title={frontmatter.title}>
-  <Header />
+<Layout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  locale={locale}
+>
+  <Header locale={locale} />
   <Breadcrumb />
   <main id="main-content">
     <section id="about" class="mx-auto w-full max-w-5xl px-6 py-8 text-base">
       <div class="about-photo">
         <OptimizedImage
           src={studioPhoto}
-          alt="Paul Graßl in his studio"
+          alt={labels.accessibility.aboutPhoto}
           width={512}
           widths={[320, 512, 768, 1024]}
           sizes="(max-width: 560px) calc(100vw - 3rem), 512px"
@@ -126,5 +134,5 @@ const { frontmatter } = Astro.props;
       }
     }
   </style>
-  <Footer />
+  <Footer locale={locale} />
 </Layout>

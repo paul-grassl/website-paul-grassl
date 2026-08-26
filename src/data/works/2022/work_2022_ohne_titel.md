@@ -2,6 +2,9 @@
 title: "Ohne Titel"
 technique: "Mixed media on canvas"
 size: "80 x 70 cm"
+de:
+  technique: "Mixed media auf Leinwand"
+  size: "80 x 70 cm"
 year: 2022
 slug: "ohne-titel-2022"
 isSeries: false

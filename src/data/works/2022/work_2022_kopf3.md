@@ -2,6 +2,9 @@
 title: "Kopf 3"
 technique: "Graphite and ink on canvas"
 size: "97 x 80 cm"
+de:
+  technique: "Graphit und Tusche auf Leinwand"
+  size: "97 x 80 cm"
 year: 2022
 slug: "kopf3-2022"
 isSeries: false

@@ -2,6 +2,9 @@
 title: "Kopf 6"
 technique: "Mixed media on linen"
 size: "100 x 77 cm"
+de:
+  technique: "Mixed media auf Leinen"
+  size: "100 x 77 cm"
 year: 2022
 slug: "kopf6-2022"
 isSeries: false

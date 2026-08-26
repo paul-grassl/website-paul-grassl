@@ -2,6 +2,9 @@
 title: "Kopf 8"
 technique: "Mixed media on canvas"
 size: "110 x 95 cm"
+de:
+  technique: "Mixed media auf Leinwand"
+  size: "110 x 95 cm"
 year: 2023
 slug: "kopf8-2023"
 isSeries: false

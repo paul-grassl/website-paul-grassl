@@ -2,6 +2,9 @@
 title: "Be what's next"
 technique: "Lithography on paper"
 size: "48.8 x 56 cm"
+de:
+  technique: "Lithographie auf Papier"
+  size: "48,8 x 56 cm"
 year: 2025
 slug: "be-whats-next-litho-2025"
 isSeries: false

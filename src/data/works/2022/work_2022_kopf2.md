@@ -2,6 +2,9 @@
 title: "Kopf 2"
 technique: "Graphite and ink on canvas"
 size: "110 x 90 cm"
+de:
+  technique: "Graphit und Tusche auf Leinwand"
+  size: "110 x 90 cm"
 year: 2022
 slug: "kopf2-2022"
 isSeries: false

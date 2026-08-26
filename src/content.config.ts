@@ -9,6 +9,12 @@ const exhibitions = defineCollection({
       location: z.string(),
       type: z.string(),
       period: z.string(),
+      de: z.object({
+        location: z.string(),
+        type: z.string(),
+        period: z.string(),
+        exhibitionViews: z.string(),
+      }),
       image: image(),
       slug: z.string(),
       images: z
@@ -30,7 +36,12 @@ const works = defineCollection({
       title: z.string(),
       technique: z.string(),
       size: z.string(),
-      year: z.number(),
+      de: z.object({
+        title: z.string().optional(),
+        technique: z.string(),
+        size: z.string(),
+      }),
+      year: z.union([z.number().int(), z.string().regex(/^\d{4}(?:-\d{4})?$/)]),
       slug: z.string(),
       isSeries: z.boolean().default(false),
       // For single works, use this image
@@ -43,6 +54,7 @@ const works = defineCollection({
             src: image(),
             orientation: z.enum(["landscape", "portrait"]).default("landscape"),
             specificTitle: z.string().optional(), // For individual pieces in series like "Work 1"
+            specificTitleDe: z.string().optional(),
           })
         )
         .optional(),
@@ -74,6 +86,17 @@ const current = defineCollection({
       image: image().optional(),
       caption: z.string().optional(),
       alt: z.string().optional(),
+      de: z
+        .object({
+          location: z.string().optional(),
+          type: z.string().optional(),
+          opening: z.string().optional(),
+          additionalInfo: z.string().optional(),
+          period: z.string().optional(),
+          caption: z.string().optional(),
+          alt: z.string().optional(),
+        })
+        .optional(),
     }),
 });
 

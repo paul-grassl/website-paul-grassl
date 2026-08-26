@@ -2,6 +2,9 @@
 title: "Körperwelt 1"
 technique: "Mixed media on canvas"
 size: "120 x 100 cm"
+de:
+  technique: "Mixed media auf Leinwand"
+  size: "120 x 100 cm"
 year: 2023
 slug: "koerperwelt1-2023"
 isSeries: false

@@ -3,6 +3,11 @@ title: "What makes a house a house"
 location: "Kobo Chika Gallery, Tokyo, Japan"
 type: "Solo show with guest artist Hamada Architects"
 period: "April 4 – April 6, 2025"
+de:
+  location: "Kobo Chika Gallery, Tokio, JP"
+  type: "Einzelausstellung mit Gastbeitrag von Hamada Architects"
+  period: "4. – 6. April 2025"
+  exhibitionViews: "mit freundlicher Genehmigung der Kobo Chika Gallery"
 image: "../../assets/exhibitionImages/2025_whatMakesAHouseAHouse/exhib_2025_whatMakesAHouseAHouse_1.jpg"
 slug: "what-makes-a-house-a-house"
 images:

@@ -1,0 +1,76 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import type { Locale } from "@/i18n";
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<Layout
+  title="Impressum"
+  description="Impressum von Paul Graßl"
+  locale={locale}
+>
+  <Header locale={locale} />
+  <main id="main-content" lang="de">
+    <section class="mx-auto w-full max-w-5xl px-6 py-8">
+      <h1 class="mb-6 text-2xl leading-tight font-normal text-foreground">
+        Impressum
+      </h1>
+
+      <div class="app-prose prose max-w-none text-base">
+        <h4 class="text-foreground">Angaben gemäß § 5 DDG</h4>
+        <p>
+          Paul Graßl<br />
+          Adresse: Heßstraße 27 (Atelier Cuallado)<br />
+          80798 München, Deutschland
+        </p>
+
+        <h4 class="text-foreground">Kontakt</h4>
+        <p>
+          E-Mail:
+          <a
+            href="mailto:paulgrassl.studio@gmail.com"
+            class="text-accent hover:text-accent">paulgrassl.studio@gmail.com</a
+          >
+        </p>
+
+        <!-- Keine USt-ID vorhanden -->
+
+        <h4 class="text-foreground">Haftung für Inhalte</h4>
+        <p>
+          Ich bin für eigene Inhalte auf diesen Seiten nach den allgemeinen
+          Gesetzen verantwortlich. Für übermittelte oder gespeicherte fremde
+          Informationen besteht keine allgemeine Überwachungs- oder
+          Nachforschungspflicht. Verpflichtungen zur Entfernung oder Sperrung
+          der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben
+          unberührt. Bei Kenntniserlangung von rechtswidrigen Inhalten entferne
+          ich diese unverzüglich.
+        </p>
+
+        <h4 class="text-foreground">Haftung für Links</h4>
+        <p>
+          Diese Website enthält Links zu externen Websites Dritter, auf deren
+          Inhalte ich keinen Einfluss habe. Für die Inhalte der verlinkten
+          Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten
+          verantwortlich.
+        </p>
+
+        <h4 class="text-foreground">Urheberrecht</h4>
+        <p>
+          Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen
+          Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung,
+          Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der
+          Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des
+          jeweiligen Autors bzw. Erstellers.
+        </p>
+      </div>
+    </section>
+  </main>
+  <Footer locale={locale} />
+</Layout>

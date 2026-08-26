@@ -2,6 +2,9 @@
 title: "Akiya"
 technique: "Mural (charcoal)"
 size: "each 550 x 330 cm"
+de:
+  technique: "Wandzeichnung (Kohle)"
+  size: "je 550 x 330 cm"
 year: 2025
 slug: "akiya-mural-2025"
 isSeries: false

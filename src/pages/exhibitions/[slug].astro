@@ -1,8 +1,5 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
-import OptimizedImage from "@/components/OptimizedImage.astro";
+import ExhibitionDetailPage from "@/components/pages/ExhibitionDetailPage.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
@@ -14,84 +11,6 @@ export async function getStaticPaths() {
 }
 
 const { exhibition } = Astro.props;
-const {
-  title,
-  location,
-  type,
-  period,
-  images = [],
-  image,
-  exhibitionViews = "XX",
-} = exhibition.data;
-const displayImages =
-  images.length > 0
-    ? images
-    : [{ src: image, orientation: "landscape" as const }];
 ---
 
-<Layout title={title} description={`Exhibition: ${title}`}>
-  <Header />
-  <main id="main-content">
-    <section class="mx-auto w-full max-w-5xl px-6 py-8">
-      <div class="flex flex-col gap-y-8">
-        <div class="w-full">
-          <h1
-            class="mb-2 text-2xl leading-tight font-normal text-foreground italic"
-          >
-            {title}
-          </h1>
-          <div
-            class="text-muted-foreground mt-0.5 flex flex-col text-base leading-tight"
-          >
-            <span>{location}</span>
-            <span>{type}</span>
-            <span>{period}</span>
-          </div>
-        </div>
-
-        {
-          displayImages.map((displayImage, index) => {
-            const isPortrait = displayImage.orientation === "portrait";
-
-            return (
-              <div class="w-full">
-                <div
-                  class={
-                    isPortrait
-                      ? "mx-auto aspect-[2/3] max-w-md overflow-hidden bg-muted"
-                      : "aspect-[3/2] w-full overflow-hidden bg-muted"
-                  }
-                >
-                  <OptimizedImage
-                    src={displayImage.src}
-                    alt={`${title}, exhibition view ${index + 1}`}
-                    width={isPortrait ? 448 : 976}
-                    widths={
-                      isPortrait
-                        ? [320, 448, 640, 896]
-                        : [480, 768, 1024, 1536, 2048]
-                    }
-                    sizes={
-                      isPortrait
-                        ? "(max-width: 496px) calc(100vw - 3rem), 448px"
-                        : "(max-width: 1024px) calc(100vw - 3rem), 976px"
-                    }
-                    priority={index === 0}
-                    fit="cover"
-                  />
-                </div>
-              </div>
-            );
-          })
-        }
-
-        <div class="w-full">
-          <div class="text-muted-foreground text-base">
-            <span>Exhibition views: {exhibitionViews}</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-  <Footer />
-</Layout>
+<ExhibitionDetailPage locale="en" exhibition={exhibition} />

@@ -2,6 +2,9 @@
 title: "Drucke 2402"
 technique: "Lino print with oil on Finnish wood pulp board"
 size: "100 x 70 cm"
+de:
+  technique: "Linoldruck mit Öl auf finnischer Holzpappe"
+  size: "100 x 70 cm"
 year: 2024
 slug: "drucke-2402-2024"
 isSeries: true
