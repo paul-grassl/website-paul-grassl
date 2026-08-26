@@ -16,8 +16,9 @@
 ## Projektstruktur (wichtigste Pfade)
 
 - `src/pages/`
-  - `index.astro`: Startseite
-  - `works.astro`: Jahresübersicht aller Arbeiten
+  - `index.astro`: englische Startseite
+  - `works.astro`: englische Übersicht aller Arbeiten
+  - `de/`: statische deutsche Seiten unter `/de/`
   - `exhibitions.astro`: Ausstellungsübersicht
   - `exhibitions/[slug].astro`: Ausstellungsdetails
   - `contact.astro`: Kontaktseite
@@ -48,11 +49,17 @@
 ```md
 ---
 title: "Titel der Arbeit"
-technique: "Technik"
-size: "Maße"
+technique: "English technique"
+size: "109.1 x 78.8 cm"
+# `title` nur ergänzen, wenn die deutsche Anzeige abweichen soll.
+de:
+  title: "Optionaler deutscher Titel"
+  technique: "Deutsche Technik"
+  size: "109,1 x 78,8 cm"
 year: YYYY
+# Bei einem Entstehungszeitraum stattdessen: year: "2024-2025"
 slug: "sprechender-slug-YYYY"
-# Reihenfolge innerhalb des Jahres (optional, Zahl aufsteigend)
+# Globale Reihenfolge auf der Works-Seite (optional, Zahl aufsteigend)
 order: 1
 # EINE EINZELNE ARBEIT:
 # image: "../../../assets/workImages/YYYY/dateiname.jpg"
@@ -62,6 +69,7 @@ images:
   - src: "../../../assets/workImages/YYYY/datei1.jpg"
     orientation: "portrait"
     specificTitle: "optional, z.B. 1/6"
+    specificTitleDe: "optionale deutsche Bezeichnung"
   - src: "../../../assets/workImages/YYYY/datei2.jpg"
     orientation: "portrait"
 ---
@@ -71,9 +79,13 @@ Hinweise:
 
 - Einzelarbeit: `image`, `orientation` verwenden (kein `images`-Array). `isSeries` muss **nicht** gesetzt werden (Default: `false`).
 - Serie: `images`-Array verwenden und `isSeries: true` setzen (Pflicht!). Beispiel siehe `src/data/works/2025/work_2025_akiya_series.md`.
-- Sortierung im Jahr über `order`.
+- `de.technique` und `de.size` sind Pflicht. `de.title` ist optional; ohne das Feld wird derselbe Werktitel in beiden Sprachen angezeigt.
+- `specificTitleDe` ist nur nötig, wenn eine individuelle Bildbezeichnung übersetzt werden soll, zum Beispiel `Left` → `Links`.
+- `year` akzeptiert ein einzelnes Jahr als Zahl (`2026`) oder einen Zeitraum als Text (`"2024-2025"`).
+- `slug`, Bilder, Bildreihenfolge, Ausrichtung und `order` gelten gemeinsam für beide Sprachversionen. Es wird keine zweite Markdown-Datei für Deutsch angelegt.
+- Sortierung aller Arbeiten erfolgt global über `order`.
 
-Die Seite `works.astro` generiert sich automatisch neu.
+Die Seiten `/works` und `/de/works` generieren sich automatisch aus derselben Datei neu. Nach Änderungen lokal beide Varianten prüfen und vor dem Veröffentlichen `pnpm run build` ausführen.
 
 ### Neue Ausstellung hinzufügen
 
