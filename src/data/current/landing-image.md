@@ -1,6 +1,6 @@
 ---
-image: "../../assets/workImages/2026/PG_2026_41x32_OoL_4-7-9(AkiyaSerie)_frontal1.jpg"
+image: "../../assets/workImages/2026/PG_2026_45x38_OoC_Entlang-des-Kanals-1_frontal1.jpg"
 caption: ""
-alt: "4-7-9 (Akiya Serie)"
+alt: "Entlang des Kanals 1"
 ---
 

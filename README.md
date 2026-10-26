@@ -16,7 +16,8 @@
 ## Projektstruktur (wichtigste Pfade)
 
 - `src/pages/`
-  - `index.astro`: englische Startseite
+  - `index.astro`: Weiterleitung zur deutschen Startseite (`/de/`)
+  - `en/index.astro`: englische Startseite (`/en/`)
   - `works.astro`: englische Übersicht aller Arbeiten
   - `de/`: statische deutsche Seiten unter `/de/`
   - `exhibitions.astro`: Ausstellungsübersicht
@@ -70,6 +71,11 @@ images:
     orientation: "portrait"
     specificTitle: "optional, z.B. 1/6"
     specificTitleDe: "optionale deutsche Bezeichnung"
+    specificTechnique: "Oil on linen"
+    specificTechniqueDe: "Öl auf Leinen"
+    specificSize: "45 x 38 cm"
+    specificSizeDe: "45 x 38 cm"
+    specificYear: 2026
   - src: "../../../assets/workImages/YYYY/datei2.jpg"
     orientation: "portrait"
 ---
@@ -81,9 +87,13 @@ Hinweise:
 - Serie: `images`-Array verwenden und `isSeries: true` setzen (Pflicht!). Beispiel siehe `src/data/works/2025/work_2025_akiya_series.md`.
 - `de.technique` und `de.size` sind Pflicht. `de.title` ist optional; ohne das Feld wird derselbe Werktitel in beiden Sprachen angezeigt.
 - `specificTitleDe` ist nur nötig, wenn eine individuelle Bildbezeichnung übersetzt werden soll, zum Beispiel `Left` → `Links`.
+- Pro Serienbild können `specificTitle`, `specificTechnique`, `specificSize` und `specificYear` die Serienangaben überschreiben. Ohne Einzelangabe gilt der jeweilige Wert der Serie. `specificYear` erlaubt auch Zeiträume wie `"2025-2026"`.
+- Für Deutsch sind `specificTitleDe`, `specificTechniqueDe` und `specificSizeDe` optional. Die Anzeige verwendet zuerst die deutsche Einzelangabe, dann die allgemeine Einzelangabe und schließlich den deutschen Serienwert. Englisch verwendet die allgemeine Einzelangabe oder den englischen Serienwert.
+- Einzelangaben bei jeder zugehörigen Ansicht eintragen, also beispielsweise sowohl bei `frontal1` als auch bei `detail1`. Beim Blättern wechseln Titel, Technik, Maße und Jahr passend zum Bild; der Serientitel bleibt bestehen.
 - `year` akzeptiert ein einzelnes Jahr als Zahl (`2026`) oder einen Zeitraum als Text (`"2024-2025"`).
 - `slug`, Bilder, Bildreihenfolge, Ausrichtung und `order` gelten gemeinsam für beide Sprachversionen. Es wird keine zweite Markdown-Datei für Deutsch angelegt.
 - Sortierung aller Arbeiten erfolgt global über `order`.
+- Neue Arbeiten grundsätzlich oben einordnen (kleinere `order`); ausdrücklich vorgegebene Reihenfolgen haben Vorrang.
 
 Die Seiten `/works` und `/de/works` generieren sich automatisch aus derselben Datei neu. Nach Änderungen lokal beide Varianten prüfen und vor dem Veröffentlichen `pnpm run build` ausführen.
 
@@ -139,6 +149,7 @@ period: "March 7 – March 28, 2026"
 
 - Inhalt aktuell in `src/pages/about.md` pflegen (nicht in `src/data/about`).
 - Das Studioporträt liegt unter `src/assets/personalImages/` und wird in `src/layouts/AboutLayout.astro` eingebunden.
+- Das Artist Statement bleibt in beiden Sprachen in `src/components/AboutIntroduction.astro` erhalten. Es wird aktuell nicht ausgegeben. Zum Wiedereinblenden `showArtistStatement` in `src/config.ts` auf `true` setzen; der Schalter gilt für beide Sprachen. Kurzangabe, Foto und Vita bleiben unabhängig davon sichtbar.
 
 ## Styling & Farben
 

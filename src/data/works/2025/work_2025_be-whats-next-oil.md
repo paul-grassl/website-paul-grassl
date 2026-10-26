@@ -8,7 +8,7 @@ de:
 year: 2025
 slug: "be-whats-next-oil-2025"
 isSeries: false
-image: "../../../assets/workImages/2025/PG_2025_120x160_be-what's-next.jpg"
+image: "../../../assets/workImages/2025/PG_2025_120x160_be-what's-next.png"
 orientation: "landscape"
 order: 16
 displaySize: "large"

@@ -1,6 +1,11 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
+const workYear = z.union([
+  z.number().int(),
+  z.string().regex(/^\d{4}(?:-\d{4})?$/),
+]);
+
 const exhibitions = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: `./src/data/exhibitions` }),
   schema: ({ image }) =>
@@ -41,7 +46,7 @@ const works = defineCollection({
         technique: z.string(),
         size: z.string(),
       }),
-      year: z.union([z.number().int(), z.string().regex(/^\d{4}(?:-\d{4})?$/)]),
+      year: workYear,
       slug: z.string(),
       isSeries: z.boolean().default(false),
       // For single works, use this image
@@ -55,6 +60,11 @@ const works = defineCollection({
             orientation: z.enum(["landscape", "portrait"]).default("landscape"),
             specificTitle: z.string().optional(), // For individual pieces in series like "Work 1"
             specificTitleDe: z.string().optional(),
+            specificTechnique: z.string().optional(),
+            specificTechniqueDe: z.string().optional(),
+            specificSize: z.string().optional(),
+            specificSizeDe: z.string().optional(),
+            specificYear: workYear.optional(),
           })
         )
         .optional(),

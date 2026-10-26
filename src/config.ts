@@ -11,6 +11,7 @@ export const SITE = {
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
   showArchives: true,
   showBackButton: true, // show back button in post detail
+  showArtistStatement: false, // Show the preserved statement on both About pages
   editPost: {
     enabled: true,
     text: "Edit page",

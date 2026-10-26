@@ -54,8 +54,10 @@ export function initWorksSlideshows() {
     const slides = Array.from(
       container.querySelectorAll<HTMLElement>(".slide")
     );
-    const titles = Array.from(
-      container.querySelectorAll<HTMLElement>(".specific-title")
+    const captions = Array.from(
+      container.querySelectorAll<HTMLElement>(
+        ".specific-title, .slide-metadata"
+      )
     );
     if (slides.length === 0) continue;
 
@@ -95,10 +97,10 @@ export function initWorksSlideshows() {
         slide.setAttribute("aria-hidden", String(!isActive));
       });
 
-      titles.forEach((title, titleIndex) => {
-        const isActive = titleIndex === currentSlide;
-        title.classList.toggle("block", isActive);
-        title.classList.toggle("hidden", !isActive);
+      captions.forEach(caption => {
+        const isActive = Number(caption.dataset.slideIndex) === currentSlide;
+        caption.classList.toggle("block", isActive);
+        caption.classList.toggle("hidden", !isActive);
       });
 
       prepareBuffer();

@@ -17,13 +17,25 @@ export default defineConfig({
   site: SITE.website,
   integrations: [
     sitemap({
-      filter: page => SITE.showArchives || !page.endsWith("/archives"),
+      filter: page =>
+        new URL(page).pathname !== "/" &&
+        (SITE.showArchives || !page.endsWith("/archives")),
       i18n: {
         defaultLocale: "en",
         locales: {
           en: "en",
           de: "de",
         },
+      },
+      serialize: item => {
+        if (["/de/", "/en/"].includes(new URL(item.url).pathname)) {
+          item.links = [
+            { lang: "de", url: new URL("/de/", SITE.website).href },
+            { lang: "en", url: new URL("/en/", SITE.website).href },
+            { lang: "x-default", url: new URL("/de/", SITE.website).href },
+          ];
+        }
+        return item;
       },
     }),
   ],

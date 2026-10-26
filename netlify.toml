@@ -5,6 +5,13 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# Open the German version by default; English home remains at /en/.
+[[redirects]]
+  from = "/"
+  to = "/de/"
+  status = 302
+  force = true
+
 # Security headers
 [[headers]]
   for = "/*"

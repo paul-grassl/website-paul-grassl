@@ -1,0 +1,26 @@
+---
+interface Props {
+  entries: {
+    technique: string;
+    size: string;
+    year: string | number;
+  }[];
+}
+
+const { entries } = Astro.props;
+---
+
+{
+  entries.map((entry, index) => (
+    <div
+      class={`slide-metadata ${index === 0 ? "block" : "hidden"}`}
+      data-slide-index={index}
+    >
+      <div class="text-muted-foreground mt-0.5 flex flex-col gap-y-0 text-sm leading-tight sm:text-base">
+        <span>{entry.technique}</span>
+        <span>{entry.size}</span>
+        <span>{entry.year}</span>
+      </div>
+    </div>
+  ))
+}

@@ -5,16 +5,6 @@ description: "Vita und künstlerische Praxis von Paul Graßl"
 lang: "de"
 ---
 
-<div class="about-introduction">
-  <p class="about-meta">*1993, lebt und arbeitet in München</p>
-  <div class="artist-statement">
-    <p><em>In meinen Arbeiten suche ich Orte auf, an denen sich etwas Gegenwärtiges abzeichnet oder an denen Verschiebungen eine sichtbare Form angenommen haben.</em></p>
-    <p><em>Meine Praxis beginnt oft mit Feldforschung: Ich fahre zu den Orten, zeichne und fotografiere sie. Mit einem Hintergrund in den Verhaltenswissenschaften liegt es mir nahe, ein Thema zu beobachten und mich damit auseinanderzusetzen, bevor es ins Bild findet.</em></p>
-    <p><em>Dabei interessieren mich besonders Motive, die als Zeichen auf eine Entwicklung hinweisen. Wie diese Orte auf mich wirken und was sie in mir auslösen, sei es Vertrautheit oder Unbehagen, fließt in meine Darstellung mit ein.</em></p>
-    <p><em>Diesen Empfindungen versuche ich in Malerei, Zeichnung und Druckgrafik nachzuspüren und ihnen eine Form zu geben.</em></p>
-  </div>
-</div>
-
 ## Ausbildung
 
 <div class="cv-item">

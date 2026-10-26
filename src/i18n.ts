@@ -1,4 +1,4 @@
-export const DEFAULT_LOCALE = "en";
+export const DEFAULT_LOCALE = "de";
 
 export type Locale = "en" | "de";
 
@@ -76,10 +76,12 @@ export const UI = {
 } as const;
 
 export function getLocaleFromPathname(pathname: string): Locale {
+  if (pathname === "/") return DEFAULT_LOCALE;
   return pathname === "/de" || pathname.startsWith("/de/") ? "de" : "en";
 }
 
 export function stripLocaleFromPathname(pathname: string): string {
+  if (pathname === "/en" || pathname === "/en/") return "/";
   if (pathname === "/de" || pathname === "/de/") return "/";
   if (pathname.startsWith("/de/")) return pathname.slice(3) || "/";
   return pathname || "/";
@@ -95,5 +97,5 @@ export function getLocalizedPath(pathname: string, locale: Locale): string {
     return normalizedPath === "/" ? "/de/" : `/de${normalizedPath}`;
   }
 
-  return normalizedPath;
+  return normalizedPath === "/" ? "/en/" : normalizedPath;
 }

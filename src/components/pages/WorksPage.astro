@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import ArtworkImage from "@/components/ArtworkImage.astro";
+import SlideshowMetadata from "@/components/SlideshowMetadata.astro";
 import { getCollection } from "astro:content";
 import { UI, type Locale } from "@/i18n";
 
@@ -62,6 +63,17 @@ const works = allWorks.sort(
               locale === "de"
                 ? work.data.de.title || work.data.title
                 : work.data.title;
+            const slideMetadata = seriesImages.map(image => ({
+              technique:
+                (locale === "de" && image.specificTechniqueDe) ||
+                image.specificTechnique ||
+                technique,
+              size:
+                (locale === "de" && image.specificSizeDe) ||
+                image.specificSize ||
+                size,
+              year: image.specificYear ?? work.data.year,
+            }));
 
             return (
               <div class="w-full">
@@ -89,8 +101,8 @@ const works = allWorks.sort(
                                 <ArtworkImage
                                   src={image.src}
                                   alt={
-                                    hasSpecificTitles
-                                      ? `${title} - ${getSpecificTitle(image) || `Work ${index + 1}`}`
+                                    getSpecificTitle(image)
+                                      ? `${title} - ${getSpecificTitle(image)}`
                                       : title
                                   }
                                   orientation={image.orientation}
@@ -121,11 +133,9 @@ const works = allWorks.sort(
                                   class={`specific-title ${index === 0 ? "block" : "hidden"}`}
                                   data-slide-index={index}
                                 >
-                                  {getSpecificTitle(image) && (
-                                    <span class="text-sm leading-snug text-foreground italic sm:text-base sm:leading-tight">
-                                      {getSpecificTitle(image)}
-                                    </span>
-                                  )}
+                                  <span class="text-sm leading-snug text-foreground italic sm:text-base sm:leading-tight">
+                                    {getSpecificTitle(image) || title}
+                                  </span>
                                 </div>
                               ))
                             ) : (
@@ -133,11 +143,7 @@ const works = allWorks.sort(
                                 <div class="text-sm leading-snug text-foreground italic sm:text-base sm:leading-tight">
                                   {title}
                                 </div>
-                                <div class="text-muted-foreground mt-0.5 flex flex-col gap-y-0 text-sm leading-tight sm:text-base">
-                                  <span>{technique}</span>
-                                  <span>{size}</span>
-                                  <span>{work.data.year}</span>
-                                </div>
+                                <SlideshowMetadata entries={slideMetadata} />
                               </div>
                             )}
                           </div>
@@ -160,11 +166,7 @@ const works = allWorks.sort(
                             <h3 class="text-sm leading-snug font-normal text-foreground italic sm:text-base sm:leading-tight">
                               {title}
                             </h3>
-                            <div class="text-muted-foreground mt-0.5 flex flex-col gap-y-0 text-sm leading-tight sm:text-base">
-                              <span>{technique}</span>
-                              <span>{size}</span>
-                              <span>{work.data.year}</span>
-                            </div>
+                            <SlideshowMetadata entries={slideMetadata} />
                           </div>
                         </div>
                       )}
